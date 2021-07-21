@@ -1,0 +1,153 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block content %}
+
+<div class="hero" style="background: url('static/images/stylist_hero_background.jpg') no-repeat center center fixed">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+
+            <h1 class="display-4">Be that perfect Hairstylist</h1>
+              <p class="lead">Join the fastest growing network of hairstylists.</p>
+            <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark">Sign Up as Stylist</a>
+
+        </div>
+    </div>
+  </div>
+  <div class="mouse">
+      <span></span>
+  </div>
+  </div>
+
+<div class="container">
+  <div class="row mt-4">
+    <h1 class="text-center">Recently Joined Hairstylists</h1>
+  </div>
+    <hr class="m-4">
+
+    <div class="row">
+      {% for stylist in stylists %}
+      <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+          <div class= "text-center m-2">
+            <a  href="{% url 'stylist_app:stylist_detail' pk=stylist.pk %}">
+            <img src="{{ stylist.profile_pic.url }}" alt=" No Picture here" class="image--cover"></a>
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title">{{ stylist.user.name }}
+              <span class="badge bg-secondary">{{stylist.rating}} </span></h5>
+              {% if stylist.region %}
+                <h6 class="card-text">{{stylist.region}} ({{stylist.region.city}})</h6>
+              {% endif %}
+                <p><strong>Signiture Styles:</strong>
+                  {% for service in services %}
+                    {% if service.stylist == stylist and service.top_style == True %}
+                      {{service.hairstyle.name}}|
+                    {% endif%}
+                  {% endfor %}</p>
+
+            <p class="card-text">{{stylist.bio|safe|truncatechars:"50"|linebreaks}}</p>
+            <a class="btn btn-outline-dark" href="{% url 'stylist_app:stylist_detail' pk=stylist.pk %}">View Profile</a>
+          </div>
+        </div>
+      </div>
+      {% endfor%}
+    </div>
+</div><!-- <div class="container"> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <img src="{% static 'images/stylist_background 2.jpg'%}" alt="">
+    </div>
+    <div class="col-sm-6">
+      <blockquote class="blockquote">
+        <p>Its more than just doing hair!</p>
+      </blockquote>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row text-center">
+    <h1>Register your Profile at FindMyHairstylist</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card" style="width: 18rem;">
+        <img src="{% static 'images/dryer_right.jpg'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title text-center">Grow</h5>
+          <p class="card-text">Build and grow your business and customer base</p>
+          <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark">Stylist - Sign Up</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card" style="width: 18rem;">
+        <img src="{% static 'images/tools.jpg'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title text-center">Customers that matter</h5>
+          <p class="card-text">Connect with customers that value your skillsets and offerings</p>
+          <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark">Stylist - Sign Up</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card" style="width: 18rem;">
+        <img src="{% static 'images/dryer_left.jpg'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title text-center">Standout</h5>
+          <p class="card-text">Showcase your talents and let your creativity standout</p>
+          <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark">Stylist - Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-4 py-5" id="icon-grid">
+   <h2 class="pb-2 border-bottom text-center">Simple and Easy to Use</h2>
+
+   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+     <div class="col d-flex align-items-start">
+       <div class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><i class="fas fa-user-edit"></i></div>
+       <div>
+         <h4 class="fw-bold mb-0">1. Register</h4><hr>
+         <p>Register your profile as a hairstylist <strong>for free</strong>. Enter you contact details for customers to get in contact with you</p>
+       </div>
+     </div>
+     <div class="col d-flex align-items-start">
+       <div class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><i class="fas fa-clipboard-list"></i></div>
+       <div>
+         <h4 class="fw-bold mb-0">2. Upload</h4><hr>
+         <p>Upload your menu with the hairstyles that you offer. The more detail you provide, the better for your customers</p>
+       </div>
+     </div>
+     <div class="col d-flex align-items-start">
+       <div class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><i class="far fa-images"></i></i></div>
+       <div>
+         <h4 class="fw-bold mb-0">3. Populate</h4><hr>
+         <p>Populate your gallery with photos and details of your best work.</p>
+       </div>
+     </div>
+     <div class="col d-flex align-items-start">
+       <div class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><i class="fas fa-users"></i></div>
+       <div>
+         <h4 class="fw-bold mb-0">4. Connect</h4><hr>
+         <p>Use our tools to gain insights and connect with your growing customer base</p>
+       </div>
+     </div>
+     </div>
+     <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark btn-block text-center">Stylist - Sign Up</a>
+   </div>
+
+
+
+{% endblock %}

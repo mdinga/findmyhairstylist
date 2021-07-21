@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <a href="{% url 'stylist_app:stylist_detail' pk=stylist.pk%}" class='btn btn-outline-dark m-2'>Back to profile</a>
+
+    <div class="text-center">
+          <h1>Add To Gallery, {{ stylist.user.name }}</h1>
+    </div>
+
+    <form method="POST" enctype='multipart/form-data' class='m-3'>
+      {% csrf_token %}
+      {{ form }}
+      <button class='btn btn-outline-dark m-3' name="button">Submit</button>
+    </form>
+
+  </div>
+{% endblock %}

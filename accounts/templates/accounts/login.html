@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="container">
+
+  {% for message in messages %}
+    <div class="alert alert-danger m-3">
+      <a class="close" href="#" data-dismiss="alert">×</a>
+      {{ message }}
+    </div>
+   {% endfor %}
+
+    <h1 class='text-center'>Log In</h1>
+
+    <form action="{% url 'accounts:login' %}" method="post">
+      {% csrf_token %}
+
+      <div class="row mb-3">
+        <label for="email" class="form-label col-sm-2">Email:</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" name="email">
+        </div>
+      </div>
+
+
+      <div class="row mb-3">
+        <label for="password" class="form-label col-sm-2">Password:</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" name="password">
+        </div>
+
+      </div>
+      <button type="submit" class="btn btn-outline-dark">Submit</button>
+    </form>
+
+    <div class="row text-center">
+      <div class="col-sm-3 m-2">
+
+      </div>
+      <div class="col-sm-2 m-2">
+        <a href="#">Reset Password</a>
+      </div>
+
+      <div class="col-sm-2 m-2">
+        <a href="{% url 'accounts:stylist_signup' %}">Stylists Sign Up Here</a>
+      </div>
+
+      <div class="col-sm-2 m-2">
+        <a href="{% url 'accounts:client_signup' %}">Clients Sign Up Here</a>
+      </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}

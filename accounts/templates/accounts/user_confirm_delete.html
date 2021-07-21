@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+      {% if user.is_stylist %}
+        <a href="{% url 'stylist_app:stylist_detail' pk=user.stylist.pk %}" class='btn btn-outline-dark m-2'>Back to profile</a>
+      {% endif %}
+
+    <div class="row text-center">
+
+      <h3> Are you sure you want to delete your profile, {{ user.name }}?</h3>
+      <h3> All you information will be lost.</h3>
+
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" name="button" class='btn btn-outline-danger'>Confirm Delete</button>
+    </form>
+    </div>
+
+  </div>
+{% endblock %}

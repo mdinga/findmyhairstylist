@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <a href="{% url 'stylist_app:stylist_detail' pk=item.stylist.pk %}" class='btn btn-outline-dark m-2'>Back to profile</a>
+
+    <div class="row text-center">
+        <h3> Are you sure you want to delete this item?</h3>
+
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <button type="submit" name="button" class='btn btn-outline-danger'>Confirm Delete</button>
+    </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+{% load stylist_extras %}
+
+<div class="container">
+
+  <div class="text-center m-3">
+    <h1>Find Your Hair Stylist</h1>
+  </div>
+
+  <div class="row stylist_row">
+    <div class="col-sm-3 ">
+      <h3>Search Stylists</h3>
+            <form method="GET" action="{% url 'stylist_app:stylists_view' %}">
+
+                  <div class="form-group mb-2">
+                      <div class="input-group">
+                          <input class="form-control" type="search" name="stylist_name" placeholder="Search by Name" />
+                      </div>
+                  </div>
+
+                <div class="form-group mb-2">
+                   <label for="hairstyle">Search by Hairstyle</label>
+                   <select id="hairstyle" class="form-select form-select-sm" name="hairstyle_name">
+                     <option selected></option>
+                     {% for style in hairstyles %}
+                      <option value="{{ style }}">{{ style.category }} - {{ style }} </option>
+                     {% endfor %}
+                   </select>
+                 </div>
+
+
+                  <div class="form-group mb-2">
+                   <label for="region">Search by Region</label>
+                   <select id="region" class="form-select form-select-sm" name="region_name">
+                     <option selected></option>
+                     {% for region in regions %}
+                     <option value="{{ region }}">{{ region.city }} - {{ region }}</option>
+                     {% endfor %}
+                   </select>
+                 </div>
+
+                 <div class="form-group mb-2">
+                   <div class="form-check">
+                     <input class="form-check-input" type="checkbox" id="houseCall" name="house_call">
+                     <label class="form-check-label" for="houseCall">
+                       House Calls
+                     </label>
+                   </div>
+                 </div>
+              <button type="submit" class="btn btn-outline-dark m-2">Search</button>
+            </form>
+    </div>
+
+    <div class="col-sm-9 no-float">
+      <div class="row">
+        {% for stylist in stylists %}
+          <div class="card" style="width: 18rem;">
+            <div class= "text-center m-2">
+              <a  href="{% url 'stylist_app:stylist_detail' pk=stylist.pk %}">
+              <img src="{{ stylist.profile_pic.url }}" alt=" No Picture here" class="image--cover"></a>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">{{ stylist.user.name }}
+                <span class="badge bg-secondary">{{stylist.rating}} </span></h5>
+                {% if stylist.region %}
+                  <h6 class="card-text">{{stylist.region}} ({{stylist.region.city}})</h6>
+                {% endif %}
+                  <p><strong>Signiture Styles:</strong>
+                    {% for service in services %}
+                      {% if service.stylist == stylist and service.top_style == True %}
+                        {{service.hairstyle.name}}|
+                      {% endif%}
+                    {% endfor %}</p>
+
+              <p class="card-text">{{stylist.bio|safe|truncatechars:"50"|linebreaks}}</p>
+              <a class="btn btn-outline-dark" href="{% url 'stylist_app:stylist_detail' pk=stylist.pk %}">View Profile</a>
+            </div>
+          </div>
+        {% endfor%}
+      </div>
+
+
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="{% my_url 1 'page' request.GET.urlencode %}">First Page</a></li>
+            {% if stylists.has_previous %}
+            <li class="page-item"><a class="page-link" href="{% my_url stylists.previous_page_number 'page' request.GET.urlencode %}">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a></li>
+            {% endif %}
+            {% if stylists.has_next %}
+            <li class="page-item"><a class="page-link" href="{% my_url stylists.next_page_number 'page' request.GET.urlencode %}">
+              <span class="sr-only">Next</span>
+              <span aria-hidden="true">&raquo;</span>
+            </a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="{% my_url stylists.paginator.num_pages 'page' request.GET.urlencode %}">Last Page</a></li>
+          </ul>
+        </nav>
+        <p class="text-center">Page {{stylists.number}} of {{stylists.paginator.num_pages}}</p>
+
+      </div>    <!-- col-md-9 no-float -->
+  </div>    <!-- row -->
+{% endblock %}

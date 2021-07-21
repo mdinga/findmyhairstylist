@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+{% load stylist_extras %}
+
+<div class="container">
+
+  <div class="text-center">
+    <h1>Find Your Hair Stylist</h1>
+  </div>
+
+  <div class="row stylist_row">
+
+    <div class="col-md-9 no-float">
+      <div class="row">
+        {% for stylist in stylists %}
+          <div class="card" style="width: 18rem;">
+            <div class= "text-center m-2">
+              <a  href="{% url 'stylist_app:stylist_detail' pk=stylist.pk %}">
+              <img src="{{ stylist.profile_pic.url }}" alt=" No Picture here" class="image--cover"></a>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">{{ stylist.user.name }}
+                <span class="badge bg-secondary">{{stylist.rating}} </span></h5>
+                {% if stylist.region %}
+                  <h6 class="card-text">{{stylist.region}} ({{stylist.region.city}})</h6>
+                {% endif %}
+                  <p><strong>Signiture Styles:</strong>
+                    {% for service in services %}
+                      {% if service.stylist == stylist and service.top_style == True %}
+                        {{service.hairstyle.name}}|
+                      {% endif%}
+                    {% endfor %}</p>
+
+              <p class="card-text">{{stylist.bio|safe|truncatechars:"50"|linebreaks}}</p>
+              <a class="btn btn-outline-dark" href="{% url 'stylist_app:stylist_detail' pk=stylist.pk %}">View Profile</a>
+            </div>
+          </div>
+        {% endfor%}
+      </div>
+
+
+
+
+  </div>    <!-- <div class="row"> -->
+
+{% endblock %}

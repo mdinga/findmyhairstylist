@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+
+  <div class="container">
+      <a class='btn btn-outline-dark m-2' href="{% url 'stylist_app:stylist_detail' pk=user.stylist.pk %}">Back to profile</a>
+
+    <div class="text-center">
+          <h1>Add/Edit A Hairstyle, {{ user.name }}</h1>
+    </div>
+
+
+    <form method="POST" enctype='multipart/form-data' class='m-3'id='service_form' data-service-url="{% url 'ajax_load_hairstyles'%}">
+      {% csrf_token %}
+      <!-- {{ form }} -->
+
+      {% for field in form.visible_fields %}
+        <div class="form-group">
+       <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+       {{ field|add_class:'form-control' }}
+         {% for error in field.errors %}
+           <span class="help-block">{{ error }}</span>
+         {% endfor %}
+        </div>
+      {% endfor %}
+
+      <button class='btn btn-outline-dark m-3' name="button">Submit</button>
+    </form>
+
+    <div class="alert alert-dark alert-dismissible fade show text-center" role="alert">
+      <strong>You can load images of this hairstyle in your gallery</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script>
+    $("#id_category").change(function () {
+           var url = $("#service_form").attr("data-service-url");  // get the url of the `load_region` view
+           var categoryId = $(this).val();  // get the selected country ID from the HTML input
+
+           $.ajax({                       // initialize an AJAX request
+               url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+               data: {
+                   'category': categoryId       // add the country id to the GET parameters
+               },
+               success: function (data) {   // `data` is the return of the `load_cities` view function
+                   $("#id_hairstyle").html(data);  // replace the contents of the city input with the data that came from the server
+                   /*
+
+                   let html_data = '<option value="">---------</option>';
+                   data.forEach(function (city) {
+                       html_data += `<option value="${city.id}">${city.name}</option>`
+                   });
+                   console.log(html_data);
+                   $("#id_city").html(html_data);
+
+                   */
+               }
+           });
+
+       });
+
+
+  </script>
+
+
+{% endblock %}

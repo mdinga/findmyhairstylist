@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="container">
+    <a href="{% url 'stylist_app:stylist_detail' pk=user.stylist.pk %}" class='btn btn-outline-dark m-2'>Back to profile</a>
+
+    <div class="row text-center m-3">
+          <h3>Update your profile {{ user.name }}</h3>
+    </div>
+
+    <form method="POST" enctype='multipart/form-data'>
+      {% csrf_token %}
+      <!-- user main details -->
+      {{ user_form.as_p}}
+
+      <!-- stylist details  -->
+      {{ form.media}}
+      {{ form.as_p}}
+
+      <div class="text-center m-3">
+          <button class='btn btn-outline-dark btn-block' name="button">Submit</button>
+      </div>
+    </form>
+    <div class = text-center>
+      <a href="{% url 'accounts:user_delete' pk=user.pk %}" class='btn btn-outline-danger m-4'>Delete Profile</a>
+    </div>
+
+  </div>
+{% endblock %}

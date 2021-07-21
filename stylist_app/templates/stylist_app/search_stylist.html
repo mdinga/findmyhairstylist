@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    <h4 class = "text-center mt-3 mb-3">Search By Area</h4>
+    {% for city in cities %}
+      <div class="col-sm-4">
+        <h5>{{city}}</h5>
+          {% for region in regions %}
+            {% if region.city == city%}
+              <p><a href="{% url 'stylist_app:searched_stylists' region_pk=region.pk hairstyle_pk=None %}">{{region}} ({{region.stylist_set.all.count}})</a></p>
+            {% endif%}
+          {% endfor %}
+
+      </div>
+    {% endfor %}
+
+<hr>
+
+  <div class="row">
+    <h4 class = "text-center mt-3 mb-3">Search By Hairstyle</h4>
+    {% for category in categories %}
+      <div class="col-sm-4">
+        <h5>{{category}}</h5>
+          {% for hairstyle in hairstyles %}
+            {% if hairstyle.category == category %}
+            <p><a href="{% url 'stylist_app:searched_stylists' region_pk=None hairstyle_pk=hairstyle.pk %}">{{hairstyle}} ({{hairstyle.stylist_set.all.count}})</a></p>
+            {% endif%}
+          {% endfor %}
+
+      </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+{% endblock %}

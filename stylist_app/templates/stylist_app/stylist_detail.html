@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% include 'stylist_app/messages.html' %}
+
+<div class="container">
+  {% if user.pk != stylist.user.pk %}
+    <a href="{% url 'stylist_app:stylists_view' %}" class= "btn btn-outline-dark m-3"> Return to Stylists</a>
+  {% endif %}
+
+
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <div class="wrapper">
+        <img src="{{ stylist.profile_pic.url }}" alt=" No Picture here" class="image--cover">
+
+      </div>
+    </div>
+    <div class="col-md-8 ml-2">
+      <p class="stylist-name-field" >{{ stylist.user.name }}  <span class="badge bg-secondary">{{ stylist.rating }}</span></p>
+
+      <p class = 'stylist-location-field'>
+                {% if stylist.region %}
+                {{stylist.region}} ({{stylist.region.city}})
+                {% endif %}
+                {% if stylist.house_calls %} - Available for House Calls
+                {% endif %}</p>
+      <p class = 'stylist-bio-field'>{% if stylist.bio %}
+                          {{stylist.bio}}
+                          {% endif %}</p>
+
+
+        {% if user.pk == stylist.user.pk %}
+          <a class = 'btn btn-outline-dark m-2' href="{% url 'stylist_app:stylist_update' pk=stylist.pk %}">Edit Profile</a>
+          <p><a href="{% url 'stylist_app:stylist_contact_update' pk=stylist.pk%}">(Update Location and Contact Details)</a></p>
+        {% endif %}
+    </div>
+  </div>
+
+<div class="stylist_info">
+  <ul class="nav nav-tabs mb-3">
+    <li class="nav-item active">
+      <a class="nav-link" href="#styles" data-toggle="tab">Hairstyles</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#gallery" data-toggle="tab">Gallery</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#contact" data-toggle="tab">Contacts</a>
+    </li>
+{% if user.pk == stylist.user.pk %}
+  <li class="nav-item">
+    <a class="nav-link" href="#bookings" data-toggle="tab">Bookings</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#customers" data-toggle="tab">Customer Insights</a>
+  </li>
+{% endif %}
+
+
+  </ul>
+
+  <div class="tab-content">
+
+      <!-- _____________________________________Hairstyles______________________________________ -->
+<div class="tab-pane active mt-5" id='styles'>
+  {% if not services %}
+    <div class="alert alert-dark alert-dismissible fade show text-center" role="alert">
+      <span>Add hairstyles to show your customers what you offer</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+  {% else %}
+
+  <div class="stylist-menu-body">
+    {% for category in categories %}
+
+    <!-- Section starts: Appetizers -->
+    <div class="mb-4">
+      <h3 class="menu-section-title">{{category.name}}s</h3>
+        {% for service in services %}
+          {% if service.category == category %}
+          <div class="menu-item">
+            <div class="menu-item-name">
+              {{service.hairstyle.name}}
+
+              {% if service.top_style %}
+                <i class="fas fa-star" style="color:gold"></i>
+              {% endif %}
+            </div>
+
+            <div class="menu-item-price">
+
+              {% if service.price %}
+                <p>R{{service.price}}</p>
+              {% else %}
+                <p>POA</p>
+              {% endif %}
+
+            </div>
+
+            <div class="menu-item-description">
+              {{service.description}}
+            </div>
+
+            {% if user.pk == stylist.user.pk %}
+            <a href="{% url 'stylist_app:service_update' pk=service.pk %}">(Edit)</a>
+            <a href="{% url 'stylist_app:service_delete' pk=service.pk %}">(Delete)</a>
+            {% endif %}
+
+          </div><!-- <div class="menu-item"> -->
+
+          {% endif %}
+        {% endfor %}
+      </div><!-- <div class="menu-section"> -->
+
+    {% endfor %}
+  </div><!-- <div class="menu-body"> -->
+  {% endif %}
+
+  {% if user.pk == stylist.user.pk %}
+   <div class="row m-3">
+     <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Add Hairstyle</a>
+   </div>
+  {% endif%}
+</div>
+      <!-- _____________________________________End Styles______________________________________ -->
+
+
+
+
+      <!-- _____________________________________Gallery______________________________________ -->
+    <div class="tab-pane mt-5" id='gallery'>
+      <!-- <div class="text-center m-3">
+        <h3>{{ stylist.user.name }}'s Gallery</h3>
+      </div> -->
+
+      {% if not portfolio %}
+        {% if user.pk == stylist.user.pk %}
+      <div class="alert alert-dark alert-dismissible fade show text-center" role="alert">
+        <span>Add items to your gallery to show off your work</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+        {% endif %}
+
+      {% else %}
+        <div class="gallery-cards">
+          {% for item in portfolio %}
+
+          <div class="gallery-card">
+
+            <div class="card__image-holder">
+              <a href="#">
+                  <img class="card__image" src="{{ item.image_thumbnail.url }}" alt=" No Picture here"/>
+              </a>
+            </div><!-- card__image-holder -->
+
+            <div class="gallery-card-title">
+                <h4>{{ item.hairstyle }}</h4>
+                <h>({{ item.hairstyle.category }})</h5>
+                <p>{{ item.likes }} Likes
+                      {% if user.pk != stylist.user.pk %}
+                        <a href="#">Add Like</a>
+                      {% endif %}
+                      </p>
+            </div>
+
+                <!-- <div class="card-description p-2">
+                  <p>{{ item.description }}</p>
+                </div> -->
+
+
+              <div class="text-center">
+                <p><a class = 'btn btn-outline-dark' href="#">More Info</a></p>
+                {% if user.pk == stylist.user.pk %}
+                  <div class="btn-group">
+                    <p><a class = 'btn btn-outline-dark m-1' href="{% url 'stylist_app:portfolio_update' pk=item.pk %}">Edit Entry</a></p>
+                    <p><a class = 'btn btn-outline-danger m-1' href="{% url 'stylist_app:portfolio_delete' pk=item.pk%}">Delete Entry</a></p>
+                  </div>
+                {% endif %}
+              </div>
+
+          </div><!-- gallery-card -->
+          {% endfor %}
+    </div><!-- "gallery-cards" -->
+
+
+    {% endif %}
+    {% if user.pk == stylist.user.pk %}
+      <div class="row m-3">
+        <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:portfolio_item_create' pk=stylist.pk%}">Add To Gallery</a>
+      </div>
+    {% endif %}
+
+</div><!-- id:gallery -->
+      <!-- _____________________________________End Gallery______________________________________ -->
+
+    <div class="tab-pane mt-5" id='bookings'>
+      <div class="text-center m-3">
+        <h3>{{ stylist.user.name }}'s Bookings</h3>
+      </div>
+    </div><!-- id:bookings -->
+
+    <div class="tab-pane mt-5" id='customers'>
+      <div class="text-center m-3">
+        <h3>{{ stylist.user.name }}'s Customers</h3>
+      </div>
+    </div><!-- id:customers -->
+
+
+      <!-- _____________________________________Contact______________________________________ -->
+    <div class="tab-pane mt-5" id='contact'>
+      <!-- <div class="text-center m-3">
+        <h3>{{ stylist.user.name }}'s Contact Details</h3>
+      </div> -->
+
+            <div class="row">
+              <div class="col-sm-6">
+                <p><strong>Location:</strong> {{ stylist.region }} ({{ stylist.region.city }})</p>
+                <p><strong>Phone: </strong> {{ stylist.phone_number }}</p>
+                <p><strong>House Calls: </strong>
+                  {% if stylist.house_calls %} Yes
+                  {% else %} No
+                  {% endif %}</p>
+                  {% if stylist.facebook %}
+                    <a href="{{ stylist.facebook}}"><img src="{% static "images/facebook_icon1.jpg" %}" alt="facebook"></a>
+                  {% endif %}
+
+                  {% if stylist.instagram %}
+                    <a href="{{ stylist.instagram}}"><img src="{% static "images/insta_icon1.jpg" %}" alt="instagram"></a>
+                  {% endif %}
+              </div>
+
+              <div class="col-sm-6">
+
+                {% if stylist.salon %}
+                  <p><strong>Salon: </strong>{{ stylist.salon.name }}</p>
+                  <p><strong>Salon Address: </strong>{{stylist.salon.address}}, {{stylist.salon.region}}, {{stylist.salon.region.city}}</p>
+                  <p><strong>Salon Contact: </strong>{{stylist.salon.phone_number}}</p>
+                {% endif %}
+
+                {% if user.pk == stylist.user.pk %}
+                  <p>(<a href="{% url 'stylist_app:salon_create' pk=stylist.pk %}"">Salon not on list? Click here to add Salon Details</a>)</p>
+                {% endif %}
+
+              </div>
+            </div>
+            {% if user.pk == stylist.user.pk %}
+              <div class="row m-3">
+                <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:stylist_contact_update' pk=stylist.pk%}">Update Contact Details</a>
+              </div>
+            {% endif %}
+
+        <!-- _____________________________________End Contact______________________________________ -->
+    </div><!-- id:contact -->
+
+    </div>
+  </div> <!-- tab content -->
+
+</div><!-- stylist_info -->
+</div><!-- container-->
+{% endblock %}
