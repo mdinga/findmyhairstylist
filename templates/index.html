@@ -4,36 +4,28 @@
 
 {% block content %}
 
-<div class="hero" style="background: url('static/images/stylist_hero_background.jpg') no-repeat center center fixed">
+<div class="hero" style="background: url('static/images/stylist_hero_background2.jpg') no-repeat center center fixed;
+                            background-size: cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;">
 
   <div class="container">
-    <div class="row">
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4">
 
-            <h1 class="display-4">Be that perfect Hairstylist</h1>
-              <p class="lead">Join the fastest growing network of hairstylists.</p>
-            <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark">Sign Up as Stylist</a>
+      <div class="stylist_home_div1">
+        <h1 class="display-4" style="postion:relative;">Be that perfect Hairstylist</h1>
+          <p class="lead">Connect and grow your customer base.</p>
+        <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark">Sign Up as Stylist</a>
+      </div>
 
-        </div>
-    </div>
-  </div>
   <div class="mouse">
       <span></span>
   </div>
   </div>
+    </div>
 
 <div class="container">
-  <div class="row mt-4">
-    <h1 class="text-center">Recently Joined Hairstylists</h1>
-  </div>
-    <hr class="m-4">
-
-    <div class="row">
+    <div class="row" style="margin-top:-40px;">
       {% for stylist in stylists %}
-      <div class="col-sm-4">
-        <div class="card" style="width: 18rem;">
+      <div class="col-md-4">
+        <div class="card" style="width: 16rem;">
           <div class= "text-center m-2">
             <a  href="{% url 'stylist_app:stylist_detail' pk=stylist.pk %}">
             <img src="{{ stylist.profile_pic.url }}" alt=" No Picture here" class="image--cover"></a>
@@ -58,29 +50,34 @@
         </div>
       </div>
       {% endfor%}
+
+      <div class="row mt-5 mb-5 text-center">
+        <h3>- Latest Hairstylist to Join - </h3>
+        <p>Sign Up and Log In to view their profiles</p>
+        <a href="#" class ="btn btn-outline-dark btn-block">Sign Up as a Stylist</a>
+      </div>
+
     </div>
 </div><!-- <div class="container"> -->
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6">
-      <img src="{% static 'images/stylist_background 2.jpg'%}" alt="">
-    </div>
-    <div class="col-sm-6">
-      <blockquote class="blockquote">
-        <p>Its more than just doing hair!</p>
-      </blockquote>
-    </div>
+<div class="div_3 text-center" style="background: url('static/images/hair_cut2.jpg') no-repeat center center fixed;
+                          background-size: cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;">
+
+  <div class="div_3_text text-center">
+    <h2>Its more than just doing hair</h2>
+    <h2>Its a passion</h2>
   </div>
 </div>
 
-<div class="container">
-  <div class="row text-center">
-    <h1>Register your Profile at FindMyHairstylist</h1>
+
+
+<div class="container mt-5">
+  <div class="row text-center m-4">
+    <h2>Register your profile for now. Its free!!</h2>
   </div>
   <div class="row">
-    <div class="col-sm-4">
-      <div class="card" style="width: 18rem;">
+    <div class="col-md-4">
+      <div class="card" style="width: 16rem;">
         <img src="{% static 'images/dryer_right.jpg'%}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Grow</h5>
@@ -89,8 +86,8 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
-      <div class="card" style="width: 18rem;">
+    <div class="col-md-4">
+      <div class="card" style="width: 16rem;">
         <img src="{% static 'images/tools.jpg'%}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Customers that matter</h5>
@@ -99,8 +96,8 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
-      <div class="card" style="width: 18rem;">
+    <div class="col-md-4">
+      <div class="card" style="width: 16rem;">
         <img src="{% static 'images/dryer_left.jpg'%}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Standout</h5>

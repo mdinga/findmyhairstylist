@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.TestPage.as_view(), name='test'),
     path('thanks/', views.ThanksPage.as_view(), name='thanks'),
+    path('contact/', views.contact, name='contact'),
     path('accounts/', include('accounts.urls')),
     path('stylist_app/', include('stylist_app.urls', namespace = 'stylists')),
     path('stylist_app/', include('django.contrib.auth.urls')),

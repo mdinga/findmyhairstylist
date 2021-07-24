@@ -33,7 +33,8 @@ def user_login(request):
         if user:
             if user.is_active and user.is_stylist:
                 login(request, user)
-                return render(request, 'stylist_app/stylist_home.html')
+                messages.success(request, 'Log In Successful')
+                return render(request, 'index.html')
             elif user.is_active and user.is_client:
                 login(request, user)
                 return render(request, 'stylist_app/stylist_home.html', {'user', user}) #NB: WILL NEED TO FIX THIS ONCE WORKING WITH CLIENTS
@@ -47,6 +48,7 @@ def user_login(request):
             return HttpResponseRedirect(reverse('accounts:login'))
     else:
         return render(request, 'accounts/login.html', {})
+
 
 
 class StylistSignUp(CreateView):

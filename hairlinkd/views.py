@@ -19,6 +19,8 @@ class TestPage(TemplateView):
 class ThanksPage(TemplateView):
      template_name = 'thanks.html'
 
+def contact(request):
+    return render(request, 'contact.html')
 
 # ajax
 

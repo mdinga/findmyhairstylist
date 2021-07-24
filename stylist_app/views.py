@@ -7,6 +7,7 @@ from django.db import IntegrityError
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from accounts import models
 from stylist_app.models import Hairstyle, Product, HairstyleCategory
@@ -79,7 +80,7 @@ def searchedStylists(request, region_pk, hairstyle_pk):
     context = {'stylists':stylists, 'services':services}
     return render(request, 'stylist_app/searched_stylists.html', context)
 
-
+@login_required
 def viewStylist(request, pk):
     user = request.user
     stylist = models.Stylist.objects.get(pk=pk)

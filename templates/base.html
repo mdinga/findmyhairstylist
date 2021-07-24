@@ -35,6 +35,7 @@
     <nav>
       <ul>
                   <li><a href="{% url 'home'%}">Home</a></li>
+                  <li><a href="{% url 'contact'%}">Contact Us</a></li>
                 {% if user.is_authenticated and user.is_stylist %}
 
                   <li><a href="{% url 'stylist_app:search'%}">Search</a></li>
@@ -61,7 +62,60 @@
   {% endblock %}
 </body>
 
-<footer>
+<footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">www.findmyhairstylist.co.za is an
+              initiative  by Hairlinkd. Our goal is to assist hairstylists to
+              continuously improve their businesses and grow their customer bases.
+              Not only do we offer a platform to showcase their skills and talent, we
+              provide them with essential tools and information to ensure they succeed.</p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>SIGN UP NOW</h6>
+            <ul class="footer-links">
+              <li><a href="{% url 'accounts:stylist_signup' %}">As a Stylist</a></li>
+              <li><a href="{% url 'accounts:client_signup' %}">As a Client</a></li>
+
+
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="">Your Profile</a></li>
+              <li><a href="">Search Stylists</a></li>
+              <li><a href="">Contact Us</a></li>
+              <li><a href="">Privacy Policy</a></li>
+              <li><a href="">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+         <a href="#">Hairlinkd</a>.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="dribbble" href="#"><i class="fa fa-instagram"></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
 <!-- JAVASCRIPTS -->
 
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
