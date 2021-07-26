@@ -3,11 +3,12 @@
 {% load static %}
 {% include 'stylist_app/messages.html' %}
 
+
 <div class="container">
+
   {% if user.pk != stylist.user.pk %}
     <a href="{% url 'stylist_app:stylists_view' %}" class= "btn btn-outline-dark m-3"> Return to Stylists</a>
   {% endif %}
-
 
   <div class="row mt-5">
     <div class="col-md-4">
@@ -31,8 +32,13 @@
 
 
         {% if user.pk == stylist.user.pk %}
+
+        <h6>Profile Effectiveness</h6>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: {{profile_completeness}}%;" aria-valuenow="{{profile_completeness}}" aria-valuemin="0" aria-valuemax="100">{{profile_completeness|floatformat:0}}%</div>
+        </div>
           <a class = 'btn btn-outline-dark m-2' href="{% url 'stylist_app:stylist_update' pk=stylist.pk %}">Edit Profile</a>
-          <p><a href="{% url 'stylist_app:stylist_contact_update' pk=stylist.pk%}">(Update Location and Contact Details)</a></p>
+
         {% endif %}
     </div>
   </div>
@@ -157,7 +163,7 @@
 
             <div class="gallery-card-title">
                 <h4>{{ item.hairstyle }}</h4>
-                <h>({{ item.hairstyle.category }})</h5>
+                <h4>({{ item.hairstyle.category }})</h4>
                 <p>{{ item.likes }} Likes
                       {% if user.pk != stylist.user.pk %}
                         <a href="#">Add Like</a>

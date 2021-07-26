@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% block content %}
 {% load static %}
 {% load bootstrap4 %}
-{% block content %}
+
 {% load stylist_extras %}
 
 <div class="container">
@@ -10,7 +11,7 @@
     <h1>Find Your Hair Stylist</h1>
   </div>
 
-  <div class="row stylist_row">
+  <div class="row">
     <div class="col-sm-3 ">
       <h3>Search Stylists</h3>
             <form method="GET" action="{% url 'stylist_app:stylists_view' %}">
@@ -108,4 +109,5 @@
   </div>    <!-- row -->
 
 </div>
+
 {% endblock %}

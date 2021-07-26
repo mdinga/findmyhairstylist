@@ -23,8 +23,20 @@
           <button class='btn btn-outline-dark btn-block' name="button">Submit</button>
       </div>
     </form>
+
+
+
     <div class = text-center>
-      <a href="{% url 'accounts:user_delete' pk=user.pk %}" class='btn btn-outline-danger m-4'>Delete Profile</a>
+      <div class="btn-group m-4">
+        <a href="{% url 'stylist_app:stylist_contact_update' pk=user.stylist.pk%}" class='btn btn-outline-dark ml-1'>Edit Contacts</a>
+        <a href="{% url 'stylist_app:service_create' pk=user.stylist.pk%}" class='btn btn-outline-dark ml-1'>Edit Hairstyles</a>
+        <a href="{% url 'stylist_app:portfolio_item_create' pk=user.stylist.pk%}" class='btn btn-outline-dark ml-1'>Edit Gallery</a>
+
+      </div>
+
+      <div>
+        <a href="{% url 'accounts:user_delete' pk=user.pk %}" class='btn btn-outline-danger ml-1'>Delete Profile</a>
+      </div>
     </div>
 
   </div>

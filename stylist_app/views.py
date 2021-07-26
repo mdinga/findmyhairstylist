@@ -92,8 +92,31 @@ def viewStylist(request, pk):
         category.append(service.category)
     categories = set(category)
 
+    profile_items = {'profile_pic': 0, 'bio':0,
+                    'region':0, 'hairstyle':0,
+                    'portfolio':0, 'phone':0}
+    completeness = 0
+    if stylist.profile_pic != "profile_pics/default_stylist.png":
+        profile_items['profile_pic'] = 1
+    if stylist.bio:
+        profile_items['bio'] = 1
+    if stylist.region:
+        profile_items['region'] = 1
+    if stylist.stylist_hairstyles.first():
+        profile_items['hairstyle'] = 1
+    if stylist.portfolio_set.first():
+        profile_items['portfolio'] = 1
+    if stylist.phone_number:
+        profile_items['phone'] = 1
 
-    context = {'user': user, 'services': services, 'stylist': stylist, 'portfolio': portfolio, 'categories': categories}
+    for k, v in profile_items.items():
+        completeness += v
+        profile_completeness = (completeness/6)*100
+
+    context = {'user': user, 'services': services, 'stylist': stylist,
+                'portfolio': portfolio, 'categories': categories,
+                'profile_completeness':profile_completeness,
+                'profile_items':profile_items}
     return render(request, 'stylist_app/stylist_detail.html', context)
 
 
