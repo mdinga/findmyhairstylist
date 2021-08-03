@@ -133,13 +133,14 @@ a{font-size: 0.85em;}
 
 .div_3{
   width: 100%;
-  height: 25em;
-  text-align: center;
+  height: auto;
+
 
 }
 
 .div_3_text{
   padding-top:15%;
+  color:#1c0000;
 }
 
 .site-footer

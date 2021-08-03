@@ -5,8 +5,8 @@
   <div class="container">
     <a href="{% url 'stylist_app:stylist_detail' pk=stylist.pk%}" class='btn btn-outline-dark m-2'>Back to profile</a>
 
-    <div class="text-center">
-          <h1>Add To Gallery, {{ stylist.user.name }}</h1>
+    <div class="text-center m-3">
+          <h3>Add To Gallery, {{ stylist.user.name }}</h3>
     </div>
 
     <form method="POST" enctype='multipart/form-data' class='m-3'>

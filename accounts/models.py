@@ -98,7 +98,7 @@ class Stylist(models.Model):
                                         options={'quality':100},
                                         default='profile_pics/default_stylist.png')
     phone_number = models.CharField(max_length=17, validators=[phone_regex], blank=True)
-    bio = models.TextField(max_length=256)
+    bio = models.TextField(max_length=256, blank=True, null=True)
     house_calls =models.BooleanField(default=False)
     facebook = models.URLField(blank = True)
     instagram = models.URLField(blank = True)

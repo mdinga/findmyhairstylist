@@ -26,7 +26,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@#3ms&ur94lkh4kh-a=s8+2$9h2kc14w#pb4x&caw*d2hath7y'
+SECRET_KEY = os.getenv("DEV_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'hairlinkd_db',
         'USER': 'postgres',
-        'PASSWORD': '0303146J',
+        'PASSWORD': os.getenv("HAIRLINKD_DB_PASSWORD"),
         'HOST': 'localhost',
         'PORT': '5432'
     }
@@ -164,5 +164,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = os.environ.get('DEVELOPMENT_EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('DEVELOPMENT_EMAIL_PASSWORD')
+EMAIL_HOST_USER = os.getenv('DEVELOPMENT_EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('DEVELOPMENT_EMAIL_PASSWORD')

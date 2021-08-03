@@ -10,8 +10,8 @@
 
       <a class='btn btn-outline-dark m-2' href="{% url 'stylist_app:stylist_detail' pk=pk %}">Back to profile</a>
 
-    <div class="row text-center">
-      <h1>Add Your Salon {{ user.name }}</h1>
+    <div class="row text-center m-3">
+      <h3>Add Your Salon {{ user.name }}</h3>
     </div>
 
     <form method="POST" enctype='multipart/form-data' class='m-3' id='salon_form' data-regions-url="{% url 'ajax_load_regions'%}">

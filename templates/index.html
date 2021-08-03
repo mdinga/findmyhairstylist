@@ -54,7 +54,7 @@
       <div class="row mt-5 mb-5 text-center">
         <h3>- Latest Hairstylist to Join - </h3>
         <p>Sign Up and Log In to view their profiles</p>
-        <a href="#" class ="btn btn-outline-dark btn-block">Sign Up as a Stylist</a>
+        <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark btn-block">Stylist - Sign Up</a>
       </div>
 
     </div>
@@ -66,6 +66,7 @@
   <div class="div_3_text text-center">
     <h2>Its more than just doing hair</h2>
     <h2>Its a passion</h2>
+    <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark m-5 ">Stylist - Sign Up</a>
   </div>
 </div>
 
