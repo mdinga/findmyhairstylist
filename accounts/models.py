@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.utils import timezone
 from django.core.validators import RegexValidator, MaxLengthValidator
 from imagekit.models import ImageSpecField, ProcessedImageField
-from imagekit.processors import ResizeToFill
+from imagekit.processors import ResizeToFill, Transpose
 
 
 
@@ -93,7 +93,7 @@ class Stylist(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     profile_pic = ProcessedImageField(upload_to = 'profile_pics/',
-                                        processors=[ResizeToFill(280,280)],
+                                        processors=[ResizeToFill(280,280), Transpose()],
                                         format='PNG',
                                         options={'quality':100},
                                         default='profile_pics/default_stylist.png')

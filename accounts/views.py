@@ -44,7 +44,7 @@ def user_login(request):
                 messages.error(request,'Account in not active')
                 return redirect('index')
         else:
-            messages.error(request,'Your email or password in incorrect')
+            messages.error(request,'Your email or password is incorrect, please try again')
             return HttpResponseRedirect(reverse('accounts:login'))
     else:
         return render(request, 'accounts/login.html', {})
