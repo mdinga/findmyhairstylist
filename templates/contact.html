@@ -5,7 +5,12 @@
 <section class="contact-page-section">
       <div class="container">
           <div class="sec-title">
-                <h2>Let's Get in Touch.</h2>
+            {% if name %}
+                <h2>Thank you for reaching out</h2>
+                <p class='lead'>We got your message </p>
+            {% else %}
+              <h2>Keep in touch</h2>
+            {% endif %}
             </div>
 
             <div class="inner-container">
@@ -17,22 +22,27 @@
 
                             <!--Contact Form-->
                             <div class="contact-form">
-                                <form method="post" action="sendemail.php" id="contact-form">
+                                <form method="post" action="{% url 'contact'%}" id="contact-form">
+                                  {% csrf_token %}
                                     <div class="row clearfix">
                                         <div class="form-group col-md-6 col-sm-6 co-xs-12">
-                                            <input type="text" name="name" value="" placeholder="Name" required>
+                                            <input type="text" name="name" placeholder="Name" required>
+                                        </div>
+
+                                        <div class="form-group col-md-6 col-sm-6 co-xs-12">
+                                            <input type="email" name="email" placeholder="Email" required>
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 co-xs-12">
-                                            <input type="email" name="email" value="" placeholder="Email" required>
+                                            <input type="text" name="subject" placeholder="Subject" required>
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 co-xs-12">
-                                            <input type="text" name="subject" value="" placeholder="Subject" required>
-                                        </div>
-                                        <div class="form-group col-md-6 col-sm-6 co-xs-12">
-                                            <input type="text" name="phone" value="" placeholder="Phone" required>
+                                            <input type="text" name="phone" placeholder="Phone">
                                         </div>
                                         <div class="form-group col-md-12 col-sm-12 co-xs-12">
                                             <textarea name="message" placeholder="Massage"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6 co-xs-12">
+                                            <input type="hidden" name="address" placeholder="address">
                                         </div>
                                         <div class="form-group col-md-12 col-sm-12 co-xs-12">
                                             <button type="submit" class="theme-btn btn-style-one">Send Now</button>
@@ -51,7 +61,7 @@
                           <h6>Contact Info</h6>
                             <ul class="list-info">
                               <li><i class="fas fa-globe"></i>2 Sungai, Hornbill Road, Douglasdale</li>
-                              <li><i class="fas fa-phone"></i>+27-71-503-8501<br>+27-79-020-2582</li>
+                              <li><i class="fas fa-phone"></i>+27-79-020-2582</li>
                             </ul>
                         </div>
                     </div>

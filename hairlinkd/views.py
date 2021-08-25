@@ -1,8 +1,9 @@
 from django.views.generic import TemplateView
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from accounts import models
 from stylist_app.models import HairstyleCategory, Hairstyle
+from django.core.mail import send_mail
 
 def home_page(request):
     stylists = models.Stylist.objects.all()[:3]
@@ -20,7 +21,25 @@ class ThanksPage(TemplateView):
      template_name = 'thanks.html'
 
 def contact(request):
-    return render(request, 'contact.html')
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        subject = request.POST.get('subject')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        address = request.POST.get('address')
+
+        if not address:
+            send_mail(
+                subject,
+                message,
+                email,
+                ['mbasa@findmyhairstylist.co.za'],
+                fail_silently=False,)
+                
+        context = {'name': name, 'subject': subject, 'email':email, 'message': message }
+        return render(request, 'contact.html', context)
+    else:
+        return render(request, 'contact.html', {})
 
 # ajax
 
