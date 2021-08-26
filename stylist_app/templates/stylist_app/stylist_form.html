@@ -7,7 +7,7 @@
     <a href="{% url 'stylist_app:stylist_detail' pk=user.stylist.pk %}" class='btn btn-outline-dark m-2'>Back to profile</a>
 
     <div class="row text-center m-3">
-          <h3>Update your profile {{ user.name }}</h3>
+          <h3>Update your profile, {{ user.name }}</h3>
     </div>
 
     <form method="POST" enctype='multipart/form-data'>
@@ -32,6 +32,29 @@
         <a href="{% url 'stylist_app:service_create' pk=user.stylist.pk%}" class='btn btn-outline-dark ml-1'>Edit Hairstyles</a>
         <a href="{% url 'stylist_app:portfolio_item_create' pk=user.stylist.pk%}" class='btn btn-outline-dark ml-1'>Edit Gallery</a>
 
+      </div>
+      <div class="profile_effectiveness">
+        <p>Update the items below to improve profile effectivness</p>
+        <div class="row">
+          <div class="col-sm-2" id="pro_pic">
+            <p>Profile Picture</p>
+          </div>
+          <div class="col-sm-2" id="bio">
+            <p>Bio</p>
+          </div>
+          <div class="col-sm-2" id="pro_pic">
+            <p>Location</p>
+          </div>
+          <div class="col-sm-2" id="pro_pic">
+            <p>Contact Details</p>
+          </div>
+          <div class="col-sm-2" id="pro_pic">
+            <p>Hairstyle Menu</p>
+          </div>
+          <div class="col-sm-2" id="pro_pic">
+            <p>Gallery</p>
+          </div>
+        </div>
       </div>
 
       <div>

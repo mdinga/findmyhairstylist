@@ -30,6 +30,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('stylist_app/', include('stylist_app.urls', namespace = 'stylists')),
     path('stylist_app/', include('django.contrib.auth.urls')),
+    path('client_app/', include('client_app.urls', namespace = 'clients')),
     path('ajax/load-regions/', views.load_regions, name='ajax_load_regions'),
     path('ajax/load-hairstyles', views.load_hairstyles, name='ajax_load_hairstyles'),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
