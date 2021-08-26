@@ -21,7 +21,7 @@ a{font-size: 0.85em;}
 
 /* ----------------------------END Main Nav Bar------------------------------- */
 
-/* ----------------------------START: STYLIST HOME PAGE------------------------- */
+/* ----------------------------START: HOME PAGE------------------------- */
 
 .hero {
   position: relative;
@@ -44,11 +44,6 @@ a{font-size: 0.85em;}
   padding-bottom: 12px;
   line-height: 3;
 }
-
-
-
-
-
 
 
 
@@ -186,6 +181,15 @@ a{font-size: 0.85em;}
     text-align:center
   }
 }
+
+
+/* ---------------------------Start Stylist Home Page------------------------ */
+.profile_progress_list ul li {
+  display:inline;
+  font-size: 80%;
+}
+
+
 .social-icons
 {
   padding-left:0;
@@ -555,6 +559,27 @@ a{font-size: 0.85em;}
 .menu-item-price{
   float: right;
   font-weight: bold;
-
   margin-top: -22px;
+}
+
+/* Client Subscription Page */
+
+.block{
+  display:inline-block;
+  width:25%;
+  margin:1px;
+  padding:5px;
+  font-size:16px;
+  text-align:center;
+}
+
+.digit{
+  display:block;
+  font-size:36px;
+  background-color:#fff;
+  overflow:hidden;
+}
+
+.subscribe_class h5{
+  color: ##FFFFFF;
 }

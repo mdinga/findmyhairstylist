@@ -33,9 +33,35 @@
 
         {% if user.pk == stylist.user.pk %}
 
-        <h6>Profile Effectiveness</h6>
+        {% if profile_completeness != 100 %}
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: {{profile_completeness}}%;" aria-valuenow="{{profile_completeness}}" aria-valuemin="0" aria-valuemax="100">{{profile_completeness|floatformat:0}}%</div>
+          <div class="progress-bar" role="progressbar" style="width: {{profile_completeness}}%;" aria-valuenow="{{profile_completeness}}" aria-valuemin="0" aria-valuemax="100"> Profile Effectiveness: {{profile_completeness|floatformat:0}}%</div>
+        </div>
+        <span style="font-size:75%;">To improve your effectiveness, update these items:</span>
+
+        {% endif %}
+
+        <div class="profile_progress_list">
+          <ul>
+            {% if profile_items.profile_pic == 0%}
+              <li><a href="{% url 'stylist_app:stylist_update' pk=stylist.pk %}">Profile Picture</a> /</li>
+            {% endif %}
+            {% if profile_items.bio == 0%}
+              <li><a href="{% url 'stylist_app:stylist_update' pk=stylist.pk %}">Profile Bio</a> /</li>
+            {% endif %}
+            {% if profile_items.region == 0%}
+              <li><a href="{% url 'stylist_app:stylist_contact_update' pk=stylist.pk%}">Location Details</a> /</li>
+            {% endif %}
+            {% if profile_items.phone == 0%}
+              <li><a href="{% url 'stylist_app:stylist_contact_update' pk=stylist.pk%}">Contact Details</a> /</li>
+            {% endif %}
+            {% if profile_items.hairstyle == 0%}
+              <li><a href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Hairstyle Menu</a> /</li>
+            {% endif %}
+            {% if profile_items.portfolio == 0%}
+              <li><a href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Hairstyle Gallery</a></li>
+            {% endif %}
+          </ul>
         </div>
           <a class = 'btn btn-outline-dark m-2' href="{% url 'stylist_app:stylist_update' pk=stylist.pk %}">Edit Profile</a>
 
@@ -59,7 +85,7 @@
     <a class="nav-link" href="#bookings" data-toggle="tab">Bookings</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#customers" data-toggle="tab">Customer Insights</a>
+    <a class="nav-link" href="#customers" data-toggle="tab">Insights</a>
   </li>
 {% endif %}
 
@@ -67,7 +93,6 @@
   </ul>
 
   <div class="tab-content">
-
       <!-- _____________________________________Hairstyles______________________________________ -->
 <div class="tab-pane active mt-5" id='styles'>
   {% if not services %}
@@ -258,11 +283,14 @@
             {% endif %}
 
         <!-- _____________________________________End Contact______________________________________ -->
-    </div><!-- id:contact -->
-
     </div>
-  </div> <!-- tab content -->
+    </div>
+  </div>
 
-</div><!-- stylist_info -->
-</div><!-- container-->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+
+</script>
 {% endblock %}

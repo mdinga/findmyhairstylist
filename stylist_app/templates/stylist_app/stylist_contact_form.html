@@ -7,7 +7,7 @@
     <a href="{% url 'stylist_app:stylist_detail' pk=user.stylist.pk %}" class='btn btn-outline-dark m-2'>Back to profile</a>
 
     <div class="row text-center m-3">
-          <h3>Update your contact details {{ user.name }}</h3>
+          <h3>Update Location and Contact Details, {{ user.name }}</h3>
     </div>
 
     <form method="POST" enctype='multipart/form-data' id='stylist_form' data-regions-url="{% url 'ajax_load_regions'%}">

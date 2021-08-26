@@ -30,6 +30,7 @@ class StylistContactForm(forms.ModelForm):
 
         labels = {
             'house_calls': 'I Do House Calls',
+            'salon': 'Salon(if applicable)'
         }
 
         widgets = {
