@@ -91,7 +91,7 @@
             <h6>SIGN UP NOW</h6>
             <ul class="footer-links">
               <li><a href="{% url 'accounts:stylist_signup' %}">As a Stylist</a></li>
-              <li><a href="{% url 'accounts:client_signup' %}">As a Client</a></li>
+              <li><a href="{% url 'client_app:subscribe'%}">As a Client</a></li>
 
 
             </ul>
@@ -100,10 +100,7 @@
           <div class="col-xs-6 col-md-3">
             <h6>Quick Links</h6>
             <ul class="footer-links">
-              <li><a href="">Your Profile</a></li>
-              <li><a href="">Search Stylists</a></li>
-              <li><a href="">Contact Us</a></li>
-              <li><a href="">Privacy Policy</a></li>
+              <li><a href="{% url 'contact' %}">Contact Us</a></li>
               <li><a href="">Sitemap</a></li>
             </ul>
           </div>
