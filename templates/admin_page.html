@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Cities and Regions</h2>
+
+
+  {% for city in cities %}
+
+<h5>{{city.name}} ({{city.regions.count}})</h5>
+<a href="{url 'update_city' pk=city.py}" class="btn btn-danger">Update {{city.name}} Regions</a>
+  {% for region in regions%}
+    <ul>
+      {% if region.city == city %}
+        <li style="display:inline;">{{region.name}}</li>
+      {% endif %}
+    </ul>
+  {% endfor%}
+{% endfor%}
+
+
+
+
+
+
+
+{% endblock%}

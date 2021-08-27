@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from accounts import models
 from stylist_app.models import HairstyleCategory, Hairstyle
 from django.core.mail import send_mail
+from django.core.files import File
 
 def home_page(request):
     stylists = models.Stylist.objects.all()[:3]
@@ -35,7 +36,7 @@ def contact(request):
                 email,
                 ['mbasa@findmyhairstylist.co.za'],
                 fail_silently=False,)
-                
+
         context = {'name': name, 'subject': subject, 'email':email, 'message': message }
         return render(request, 'contact.html', context)
     else:
@@ -54,3 +55,14 @@ def load_hairstyles(request):
     hairstyles = Hairstyle.objects.filter(category_id=category_id).all()
     context = {'hairstyles': hairstyles}
     return render(request, 'hairstyle_dropdown_options.html', context)
+
+
+def view_admin(request):
+    cities = models.City.objects.order_by("name")
+    regions = models.Region.objects.order_by("name")
+
+    context = {'cities': cities, 'regions':regions}
+    return render (request, 'admin_page.html', context)
+
+def update_city(request, pk):
+    pass

@@ -36,10 +36,10 @@ def user_login(request):
                 messages.success(request, 'Log In Successful')
                 return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk':user.stylist.pk}))
             elif user.is_active and user.is_client:
-                login(request, user)
-                return render(request, 'stylist_app/stylist_home.html', {'user', user}) #NB: WILL NEED TO FIX THIS ONCE WORKING WITH CLIENTS
-            elif user.is_active and user.is_staff:
                 pass
+            elif user.is_active and user.is_staff:
+                login(request, user)
+                return HttpResponseRedirect(reverse('admin_page'))
             else:
                 messages.error(request,'Account in not active')
                 return redirect('index')
@@ -48,8 +48,6 @@ def user_login(request):
             return HttpResponseRedirect(reverse('accounts:login'))
     else:
         return render(request, 'accounts/login.html', {})
-
-
 
 class StylistSignUp(CreateView):
     model = User
