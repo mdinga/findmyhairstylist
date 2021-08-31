@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="container">
+  <h3 class="display-4">Congratulations, Sign Up Successfull </h3>
+  <p class="lead">You may proceed to log in</p>
+  <a href="{% url 'accounts:login' %}" class="btn btn-outline-dark">Log In</a>
+
+</div>
+
+{% endblock%}

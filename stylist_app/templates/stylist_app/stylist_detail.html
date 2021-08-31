@@ -35,7 +35,7 @@
 
         {% if profile_completeness != 100 %}
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: {{profile_completeness}}%;" aria-valuenow="{{profile_completeness}}" aria-valuemin="0" aria-valuemax="100"> Profile Effectiveness: {{profile_completeness|floatformat:0}}%</div>
+          <div class="progress-bar" role="progressbar" style="width: {{profile_completeness}}%; color:black;" aria-valuenow="{{profile_completeness}}" aria-valuemin="0" aria-valuemax="100"> Profile Effectiveness: {{profile_completeness|floatformat:0}}%</div>
         </div>
         <span style="font-size:75%;">To improve your effectiveness, update these items:</span>
 

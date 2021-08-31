@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
+from django.core.mail import send_mail
 
 from accounts.models import User, Stylist, Client, City, Region
 from accounts.forms import StylistSignupForm, ClientSignupForm
@@ -52,7 +53,7 @@ def user_login(request):
 class StylistSignUp(CreateView):
     model = User
     form_class = StylistSignupForm
-    success_url = reverse_lazy('accounts:login')
+    success_url = reverse_lazy('accounts:stylist_success')
     template_name = 'accounts/stylist_signup.html'
 
 
@@ -65,3 +66,11 @@ class ClientSignUp(CreateView):
 class UserDeleteView(DeleteView):
     model = User
     success_url = reverse_lazy('home')
+
+
+def stylist_signup_success(request):
+    subject = "New Hairstylist Has Signed up"
+    message = "Congratulations, A new haistylist has signed up."
+    email = "DONOTREPLAY@findmyhairstylist.co.za"
+    send_mail(subject, message, email, ['mbasa@findmyhairstylist.co.za'], fail_silently=False,)
+    return render(request, 'accounts/stylist_success.html', {})

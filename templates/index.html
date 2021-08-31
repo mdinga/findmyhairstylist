@@ -4,6 +4,15 @@
 
 {% block content %}
 
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Hairstylists from <strong>Fourways</strong> and <strong>Sandton</strong> area are invited to Sign Up for FREE'
+  <a type="button" class="close" style="float:right;" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">X</span></a>
+
+</div>
+
+
+
 <div class="hero" style="background: url('static/images/div1_bg.png') no-repeat center center scroll;
                             background-size: cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: contain;">
   <div class="container div_1_text">
@@ -19,6 +28,7 @@
   <p class = "lead">Sign up now and start growing your customer base and hair business</p>
   <p><strong>IT'S FREE</strong></p>
   <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark">Stylist - Sign Up</a>
+
 </div>
 
 

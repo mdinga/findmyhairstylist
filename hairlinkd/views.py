@@ -1,16 +1,18 @@
 from django.views.generic import TemplateView
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from accounts import models
+from accounts.models import Region, City, Stylist, ServiceOffering
 from stylist_app.models import HairstyleCategory, Hairstyle
 from django.core.mail import send_mail
+from django.contrib import messages
 from django.core.files import File
 
 def home_page(request):
-    stylists = models.Stylist.objects.all()[:3]
-    services = models.ServiceOffering.objects.filter(stylist__in=stylists)
-    regions = models.Region.objects.filter(stylist__in=stylists).distinct().order_by('city')
+    stylists = Stylist.objects.all()[:3]
+    services = ServiceOffering.objects.filter(stylist__in=stylists)
+    regions = Region.objects.filter(stylist__in=stylists).distinct().order_by('city')
 
+    messages.success(request, 'Hairstylists from Fourways and Sandton area are invited to Sign Up for FREE')
     context = {'stylists':stylists, 'services':services, 'regions':regions}
     return render(request, 'index.html', context)
 
@@ -58,8 +60,8 @@ def load_hairstyles(request):
 
 
 def view_admin(request):
-    cities = models.City.objects.order_by("name")
-    regions = models.Region.objects.order_by("name")
+    cities = City.objects.order_by("name")
+    regions = Region.objects.order_by("name")
 
     context = {'cities': cities, 'regions':regions}
     return render (request, 'admin_page.html', context)

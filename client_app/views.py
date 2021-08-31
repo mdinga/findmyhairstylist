@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.conf import settings
 from mailchimp_marketing import Client
 from mailchimp_marketing.api_client import ApiClientError
+from django.core.mail import send_mail
 
 
 # Mailchimp Settings
@@ -40,8 +41,18 @@ def subscription(request):
     if request.method == "POST":
         email = request.POST['email']
         name = request.POST['name']
+        subject = 'New Subscriber'
+        message = 'Congratulations, you have a new subscriber'
+
         if not name:
             subscribe(email)
+            send_mail(
+                subject,
+                message,
+                email,
+                ['mbasa@findmyhairstylist.co.za'],
+                fail_silently=False,
+            )
             messages.success(request, "You have been subscribed. Thank You! ")
         else:
             messages.success(request, "Sent")

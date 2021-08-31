@@ -35,8 +35,7 @@ class StylistContactForm(forms.ModelForm):
 
         widgets = {
 
-            'phone_number': forms.TextInput(attrs={'class':'form-control',
-                                            'placeholder': 'You clients will contact you from this number'},),
+            'phone_number': forms.TextInput(attrs={'class':'form-control'},),
             'house_calls': forms.NullBooleanSelect(attrs={'class':'form-control'}),
             'city': forms.Select(attrs={'class':'form-control'}),
             'region': forms.Select(attrs={'class':'form-control'}),
@@ -84,7 +83,7 @@ class ServiceForm(forms.ModelForm):
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            self.fields['hairstyle'].queryset = Hairstyle.objects.none()
+            self.fields['hairstyle'].queryset = Hairstyle.objects.order_by('name')
 
             if 'category' in self.data:
                 try:
