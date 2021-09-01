@@ -70,7 +70,7 @@ class ServiceForm(forms.ModelForm):
             'hairstyle': 'Select Hairstyle',
             'description': 'More Info (Limit: 120 Characters)',
             'price': 'Add Price',
-            'top_style': 'Signiture Style (Can only have 3 Signiture Styles)'
+            'top_style': 'I Specialize in this Style (Can only have 3 Specialize Styles)'
         }
 
         widgets = {
@@ -99,7 +99,7 @@ class ServiceForm(forms.ModelForm):
             cleaned_top_style = all_clean_data['top_style']
             top_styles = ServiceOffering.objects.filter(stylist=cleaned_stylist, top_style=cleaned_top_style)
             if top_styles.count() > 3:
-                raise forms.ValidationError("Sorry, you can't have more than 3 Signiture Styles")
+                raise forms.ValidationError("Sorry, you can't have more than 3 Specialize Styles")
 
 
 class Productform(forms.ModelForm):
@@ -113,7 +113,7 @@ class SalonForm(forms.ModelForm):
         labels = {
             'name': 'Salon Name',
             'phone_number': 'Salon Phone Number',
-            'address': 'Salon Address'
+            'address': 'Street Number and Name'
         }
 
         widgets = {

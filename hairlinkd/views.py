@@ -11,8 +11,7 @@ def home_page(request):
     stylists = Stylist.objects.all()[:3]
     services = ServiceOffering.objects.filter(stylist__in=stylists)
     regions = Region.objects.filter(stylist__in=stylists).distinct().order_by('city')
-
-    messages.success(request, 'Hairstylists from Fourways and Sandton area are invited to Sign Up for FREE')
+    
     context = {'stylists':stylists, 'services':services, 'regions':regions}
     return render(request, 'index.html', context)
 

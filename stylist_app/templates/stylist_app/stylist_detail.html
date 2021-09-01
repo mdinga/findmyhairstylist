@@ -35,9 +35,9 @@
 
         {% if profile_completeness != 100 %}
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: {{profile_completeness}}%; color:black;" aria-valuenow="{{profile_completeness}}" aria-valuemin="0" aria-valuemax="100"> Profile Effectiveness: {{profile_completeness|floatformat:0}}%</div>
+          <div class="progress-bar" role="progressbar" style="width: {{profile_completeness}}%; color:black;" aria-valuenow="{{profile_completeness}}" aria-valuemin="0" aria-valuemax="100">{{profile_completeness|floatformat:0}}%</div>
         </div>
-        <span style="font-size:75%;">To improve your effectiveness, update these items:</span>
+        <span style="font-size:75%;">To maximise your <strong>profile effectiveness</strong>, update these items:</span>
 
         {% endif %}
 
@@ -59,7 +59,7 @@
               <li><a href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Hairstyle Menu</a> /</li>
             {% endif %}
             {% if profile_items.portfolio == 0%}
-              <li><a href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Hairstyle Gallery</a></li>
+              <li><a href="{% url 'stylist_app:portfolio_item_create' pk=stylist.pk%}">Hairstyle Gallery</a></li>
             {% endif %}
           </ul>
         </div>
@@ -96,11 +96,12 @@
       <!-- _____________________________________Hairstyles______________________________________ -->
 <div class="tab-pane active mt-5" id='styles'>
   {% if not services %}
+    {% if user.pk == stylist.user.pk %}
     <div class="alert alert-dark alert-dismissible fade show text-center" role="alert">
       <span>Add hairstyles to show your customers what you offer</span>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-
+    {% endif %}
   {% else %}
 
   <div class="stylist-menu-body">
