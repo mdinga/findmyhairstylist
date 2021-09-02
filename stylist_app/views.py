@@ -49,7 +49,7 @@ def listStylists(request):
         stylists = stylists.filter(Q(region__name = region_query))
 
     if is_valid_queryparam(hairstyle_query):
-         stylists = stylists.filter(hairstyle__name = hairstyle_query)
+         stylists = stylists.filter(hairstyles__name = hairstyle_query)
 
     if house_call_query == 'on':
         stylists = stylists.filter(house_calls=True)

@@ -22,11 +22,11 @@
 
       <p class = 'stylist-location-field'>
                 {% if stylist.region %}
-                {{stylist.region}} ({{stylist.region.city}})
+                <em>{{stylist.region}} ({{stylist.region.city}})</em>
                 {% endif %}
-                {% if stylist.house_calls %} - Available for House Calls
+                {% if stylist.house_calls %} - <em>Available for House Calls</em>
                 {% endif %}</p>
-      <p class = 'stylist-bio-field'>{% if stylist.bio %}
+      <p class='stylist-bio-field' style="font-size:90%;">{% if stylist.bio %}
                           {{stylist.bio}}
                           {% endif %}</p>
 

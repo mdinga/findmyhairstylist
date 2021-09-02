@@ -17,7 +17,7 @@ class StylistForm(forms.ModelForm):
         }
         widgets = {
             'profile_pic':forms.FileInput(attrs={'class':'form-control'}),
-            'bio': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'Tell your clients about you and what you offer'}),
+            'bio': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'What is it about you and your services that is special for your clients?'}),
         }
 
 class StylistContactForm(forms.ModelForm):
@@ -76,7 +76,7 @@ class ServiceForm(forms.ModelForm):
         widgets = {
             'category' : forms.Select(attrs={'class': 'form-control mb-4'}),
             'hairstyle': forms.Select(attrs={'class': 'form-control mb-4'}),
-            'description': forms.Textarea(attrs={'placeholder': 'Optional', 'class': 'form-control mb-4'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Optional: Provide additional details on this hairstyle', 'class': 'form-control mb-4'}),
             'price': forms.TextInput(attrs={'placeholder': 'Optional (Leave blank for POA)', 'class': 'form-control mb-4'}),
             'top_style': forms.NullBooleanSelect(attrs={'class': 'form-control mb-4'})
         }
