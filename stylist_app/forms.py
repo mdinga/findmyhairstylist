@@ -17,7 +17,7 @@ class StylistForm(forms.ModelForm):
         }
         widgets = {
             'profile_pic':forms.FileInput(attrs={'class':'form-control'}),
-            'bio': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'What is it about you and your services that is special for your clients?'}),
+            'bio': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'e.g: Tell your clients why you love being a hairstylist.'}),
         }
 
 class StylistContactForm(forms.ModelForm):
@@ -94,12 +94,12 @@ class ServiceForm(forms.ModelForm):
             elif self.instance.pk:
                 self.fields['hairstyle'].queryset = self.instance.category.hairstyle_set.order_by('name')
 
-        def clean_top_style(self):
-            cleaned_stylist = all_clean_data['stylist']
-            cleaned_top_style = all_clean_data['top_style']
-            top_styles = ServiceOffering.objects.filter(stylist=cleaned_stylist, top_style=cleaned_top_style)
-            if top_styles.count() > 3:
-                raise forms.ValidationError("Sorry, you can't have more than 3 Specialize Styles")
+        # def clean_top_style(self):
+        #     cleaned_stylist = all_clean_data['stylist']
+        #     cleaned_top_style = all_clean_data['top_style']
+        #     top_styles = ServiceOffering.objects.filter(stylist=cleaned_stylist, top_style=cleaned_top_style)
+        #     if top_styles.count() > 3:
+        #         raise forms.ValidationError("Sorry, you can't have more than 3 Specialize Styles")
 
 
 class Productform(forms.ModelForm):

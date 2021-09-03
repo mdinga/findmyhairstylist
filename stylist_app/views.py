@@ -181,16 +181,26 @@ def createService(request, pk):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.stylist = stylist
-            if limit_top_styles(current_services, 3):
+            if instance.top_style == True:
+                if limit_top_styles(current_services, 3):
+                    try:
+                        instance.save()
+                        messages.success(request, 'Hairstyle has been added')
+                        return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk': stylist.pk}))
+                    except IntegrityError:
+                        return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk': stylist.pk}))
+                        messages.error(request, 'Sorry, you already have this hairstyle')
+                else:
+                    messages.error(request, "Sorry, you can't have more than 3 signiture hairstyles")
+                    return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk': stylist.pk}))
+            else:
                 try:
                     instance.save()
                     messages.success(request, 'Hairstyle has been added')
                     return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk': stylist.pk}))
                 except IntegrityError:
+                    return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk': stylist.pk}))
                     messages.error(request, 'Sorry, you already have this hairstyle')
-            else:
-                messages.error(request, "Sorry, you can't have more than 3 signiture hairstyles")
-                return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk': stylist.pk}))
 
     context = {'form':form}
     return render(request, 'stylist_app/hair_form.html', context)
