@@ -70,7 +70,7 @@
                 {% if stylist.region %}
                   <h6 class="card-text">{{stylist.region}} ({{stylist.region.city}})</h6>
                 {% endif %}
-                  <p><strong>I Specialise In:</strong>
+                  <p><strong>Speciality:</strong>
                     {% for service in services %}
                       {% if service.stylist == stylist and service.top_style == True %}
                         {{service.hairstyle.name}}|
