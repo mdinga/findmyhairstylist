@@ -58,7 +58,7 @@
     <div class="col-sm-9 no-float">
       <div class="row">
         {% for stylist in stylists %}
-          <div class="card" style="width: 18rem;">
+          <div class="card m-1" style="width: 18rem;">
             <div class= "text-center m-2">
               <a  href="{% url 'stylist_app:stylist_detail' pk=stylist.pk %}">
               <img src="{{ stylist.profile_pic.url }}" alt=" No Picture here" class="image--cover"></a>

@@ -24,7 +24,8 @@ def is_valid_queryparam(param):
     return param != '' and param is not None
 
 def listStylists(request):
-    stylists = models.Stylist.objects.all().order_by('-user__date_joined')
+    # stylists = models.Stylist.objects.all().order_by('-user__date_joined')
+    stylists = models.Stylist.objects.all().order_by('user__name')
     hairstyles = models.Hairstyle.objects.filter(stylist__in =stylists).distinct().order_by('category')
     services = models.ServiceOffering.objects.filter(stylist__in=stylists)
     regions = models.Region.objects.filter(stylist__in=stylists).distinct().order_by('city')
