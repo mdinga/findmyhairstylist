@@ -37,7 +37,9 @@ def user_login(request):
                 messages.success(request, 'Log In Successful')
                 return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk':user.stylist.pk}))
             elif user.is_active and user.is_client:
-                pass
+                login(request, user)
+                messages.success(request, 'Log In Successful')
+                return HttpResponseRedirect(reverse('client_app:client_detail', kwargs={'pk':user.client.pk}))
             elif user.is_active and user.is_staff:
                 login(request, user)
                 return HttpResponseRedirect(reverse('admin_page'))

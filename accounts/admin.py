@@ -1,8 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-
-from .models import User, Stylist, Client, ServiceOffering, ProductOffering, City, Region
-
+from .models import User, Stylist, Client, ServiceOffering, ProductOffering, City, Region, Review
 
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
@@ -41,3 +39,4 @@ admin.site.register(ServiceOffering)
 admin.site.register(ProductOffering)
 admin.site.register(City)
 admin.site.register(Region)
+admin.site.register(Review)

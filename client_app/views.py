@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.conf import settings
 from mailchimp_marketing import Client
+from accounts import models
 from mailchimp_marketing.api_client import ApiClientError
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 
 
 # Mailchimp Settings
@@ -11,6 +13,13 @@ api_key = settings.MAILCHIMP_API_KEY
 server = settings.MAILCHIMP_DATA_CENTER
 list_id = settings.MAILCHIMP_EMAIL_LIST_ID
 
+
+@login_required
+def viewClient(request, pk):
+    client = models.Client.objects.get(pk = pk)
+
+    context = {'client':client}
+    return render(request, 'client_app/client_details.html', context)
 
 # Subscription Logic
 def subscribe(email):

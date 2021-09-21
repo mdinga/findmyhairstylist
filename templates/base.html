@@ -35,22 +35,34 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-inverse p-3">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light bg-inverse p-3">
     <a class="navbar-brand" href="{% url 'home'%}"><img src="{% static 'images/FindMyHairstylist_logo.png'%}" style="max-width: 300px"></img></a>
 
       <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto text-center">
             <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'home'%}">Home</a></li>
 
-{% if user.is_authenticated and user.is_stylist %}
+{% if user.is_authenticated and user.is_admin %}
           <!-- <li><a class="nav-link" href="{% url 'stylist_app:search'%}">Search</a></li> -->
+          <li><a class="nav-link" href="#">Admin Profile</a></li>
+          <li><a class="nav-link" href="{% url 'stylist_app:stylists_view' %}">Stylists</a></li>
+          <li><a class="nav-link" href="#">Clients</a></li>
+          <li><a class="nav-link" href="{% url 'accounts:logout'%}">Logout</a></li>
+
+{% elif user.is_authenticated and user.is_stylist %}
           <li><a class="nav-link" href="{% url 'stylist_app:stylist_detail' pk=user.stylist.pk%}">My Profile</a></li>
           <li><a class="nav-link" href="{% url 'stylist_app:stylists_view' %}">Stylists</a></li>
           <li><a class="nav-link" href="{% url 'accounts:logout'%}">Logout</a></li>
+
+{% elif user.is_authenticated and user.is_client %}
+          <li><a class="nav-link" href="{% url 'client_app:client_detail' pk=user.client.pk%}">My Profile</a></li>
+          <li><a class="nav-link" href="{% url 'stylist_app:stylists_view' %}">Stylists</a></li>
+          <li><a class="nav-link" href="{% url 'accounts:logout'%}">Logout</a></li>
+
 {% else %}
           <li><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
           <li><a class="nav-link" href="{% url 'accounts:stylist_signup' %}">Stylist-Sign Up </a></li>
-          <li><a class="nav-link" href="{% url 'client_app:subscribe' %}">Client-Sign Up</a></li>
+          <li><a class="nav-link" href="{% url 'accounts:client_signup' %}">Client-Sign Up</a></li>
           <!-- <li><a class="nav-link" href="{% url 'accounts:client_signup' %}">Client-Sign Up</a></li> -->
 {% endif %}
           <li class="nav-item"><a class="nav-link" href="{% url 'contact'%}">Contact Us</a></li>

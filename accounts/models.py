@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
+from datetime import datetime
 from django.core.validators import RegexValidator, MaxLengthValidator
 from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill, Transpose
@@ -169,6 +170,26 @@ class Portfolio(models.Model):
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     fav_hairstlye = models.CharField(max_length=254, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.name
+
+class Review(models.Model):
+    SCORES = ((1,1), (2,2), (3,3), (4,4), (5,5))
+
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    stylist = models.ForeignKey(Stylist, on_delete=models.CASCADE)
+    criterion_1 = models.IntegerField(default = 0, choices = SCORES)
+    criterion_2 = models.IntegerField(default = 0, choices = SCORES)
+    criterion_3 = models.IntegerField(default = 0, choices = SCORES)
+    criterion_4 = models.IntegerField(default = 0, choices = SCORES)
+    criterion_5 = models.IntegerField(default = 0, choices = SCORES)
+    comment = models.TextField(max_length= 128, null=True, blank=True)
+    recommendation = models.BooleanField(blank=True, null=True)
+    total_rating = models.FloatField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
 
 
 # Create your models here.

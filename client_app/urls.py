@@ -6,5 +6,6 @@ app_name = 'client_app'
 
 urlpatterns = [
     path('client_subscribe/', views.subscription, name='subscribe'),
+    path('client_detail/<int:pk>', views.viewClient, name='client_detail'),
 
 ]
