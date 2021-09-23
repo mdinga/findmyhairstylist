@@ -1,0 +1,63 @@
+{% load static %}
+<div class="tab-pane active mt-5" id='styles'>
+  {% if not services %}
+    {% if user.pk == stylist.user.pk %}
+    <div class="alert alert-dark alert-dismissible fade show text-center" role="alert">
+      <span>Add hairstyles to show your customers what you offer</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+  {% else %}
+
+  <div class="stylist-menu-body">
+    {% for category in categories %}
+
+    <!-- Section starts: Appetizers -->
+    <div class="mb-4">
+      <h3 class="menu-section-title">{{category.name}}</h3>
+        {% for service in services %}
+          {% if service.category == category %}
+          <div class="menu-item">
+            <div class="menu-item-name">
+              {{service.hairstyle.name}}
+
+              {% if service.top_style %}
+                <i class="fas fa-star" style="color:gold"></i>
+              {% endif %}
+            </div>
+
+            <div class="menu-item-price">
+
+              {% if service.price %}
+                <p>R{{service.price}}</p>
+              {% else %}
+                <p>POA</p>
+              {% endif %}
+
+            </div>
+
+            <div class="menu-item-description">
+              {{service.description}}
+            </div>
+
+            {% if user.pk == stylist.user.pk %}
+            <a href="{% url 'stylist_app:service_update' pk=service.pk %}">(Edit)</a>
+            <a href="{% url 'stylist_app:service_delete' pk=service.pk %}">(Delete)</a>
+            {% endif %}
+
+          </div><!-- <div class="menu-item"> -->
+
+          {% endif %}
+        {% endfor %}
+      </div><!-- <div class="menu-section"> -->
+
+    {% endfor %}
+  </div><!-- <div class="menu-body"> -->
+  {% endif %}
+
+  {% if user.pk == stylist.user.pk %}
+   <div class="row m-3">
+     <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Add Hairstyle</a>
+   </div>
+  {% endif%}
+</div>

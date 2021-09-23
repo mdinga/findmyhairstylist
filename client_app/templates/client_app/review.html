@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <a href="{% url 'stylist_app:stylist_detail' pk=stylist.pk%}" class='btn btn-outline-dark m-2'>Back to Hairstylist</a>
+
+    <div class="text-center m-3">
+          <h3>How well did {{ stylist.user.name }} do?</h3>
+          <p><em><strong>NB:</strong> You can only review hairstylists you visited</em></p>
+    </div>
+    <div class="scale">
+      <p><strong>Rating Scale: </strong>1 = Horrible, 5 = Excellent</p>
+
+    </div>
+
+    <form method="POST" enctype='multipart/form-data' class='m-3'>
+      {% csrf_token %}
+      {{form}}
+
+      <button class='btn btn-outline-dark m-3' name="button">Submit</button>
+    </form>
+
+    <p style="font-size:80%;">Need help with your review? <a href="{% url 'contact'%}">Email</a> or Whatsapp us on 079 020 2582</p>
+
+  </div>
+{% endblock %}

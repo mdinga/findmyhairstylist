@@ -1,0 +1,18 @@
+<h4>{{review.stylist.user.name}}'s Reviews</h4>
+
+
+    <p>Reviewed by {{review.client.user.name}} on <em>{{review.created}}</em></p>
+    <p>Appointment Date: {{review.appointment}} </p>
+    <p>Value: {{review.value}}</p>
+    <p>Hygiene: {{review.hygiene}}</p>
+    <p>Expectations Met: {{review.expectation}}</p>
+    <p>Craft: {{review.craft}}</p>
+    <p>Professionalism: {{review.professional}}</p>
+    <p>Would you recommend: {{review.recommendation}}</p>
+    <p><strong>Total Rating: {{review.total_rating}}</strong></p>
+
+
+    {% if user.pk == review.client.user.pk %}
+      <a class='btn btn-outline-dark' href="{% url 'client_app:update_review' pk=review.pk%}">Edit</a>
+      <a class='btn btn-outline-danger' href="{% url 'client_app:delete_review' pk=review.pk%}">Delete</a>
+    {% endif %}

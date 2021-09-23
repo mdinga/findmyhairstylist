@@ -7,6 +7,9 @@ class Favourite(models.Model):
     stylist = models.ForeignKey(Stylist, related_name='stylist_as_favourite'
                                 ,on_delete=models.CASCADE)
 
+    class Meta:
+        unique_together = ('client', 'stylist')
+
 
 
 

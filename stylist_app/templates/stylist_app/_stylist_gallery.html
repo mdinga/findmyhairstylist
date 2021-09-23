@@ -1,0 +1,64 @@
+{% load static %}
+<div class="tab-pane mt-5" id='gallery'>
+  <!-- <div class="text-center m-3">
+    <h3>{{ stylist.user.name }}'s Gallery</h3>
+  </div> -->
+
+  {% if not portfolio %}
+    {% if user.pk == stylist.user.pk %}
+  <div class="alert alert-dark alert-dismissible fade show text-center" role="alert">
+    <span>Add items to your gallery to show off your work</span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+    {% endif %}
+
+  {% else %}
+    <div class="gallery-cards">
+      {% for item in portfolio %}
+
+      <div class="gallery-card">
+
+        <div class="card__image-holder">
+          <a href="#">
+              <img class="card__image" src="{{ item.image_thumbnail.url }}" alt=" No Picture here"/>
+          </a>
+        </div><!-- card__image-holder -->
+
+        <div class="gallery-card-title">
+            <h4>{{ item.hairstyle }}</h4>
+            <h4>({{ item.hairstyle.category }})</h4>
+            <p>{{ item.likes }} Likes
+                  {% if user.pk != stylist.user.pk %}
+                    <a href="#">Add Like</a>
+                  {% endif %}
+                  </p>
+        </div>
+
+            <!-- <div class="card-description p-2">
+              <p>{{ item.description }}</p>
+            </div> -->
+
+
+          <div class="text-center">
+            <p><a class = 'btn btn-outline-dark' href="#">More Info</a></p>
+            {% if user.pk == stylist.user.pk %}
+              <div class="btn-group">
+                <p><a class = 'btn btn-outline-dark m-1' href="{% url 'stylist_app:portfolio_update' pk=item.pk %}">Edit Entry</a></p>
+                <p><a class = 'btn btn-outline-danger m-1' href="{% url 'stylist_app:portfolio_delete' pk=item.pk%}">Delete Entry</a></p>
+              </div>
+            {% endif %}
+          </div>
+
+      </div><!-- gallery-card -->
+      {% endfor %}
+</div><!-- "gallery-cards" -->
+
+
+{% endif %}
+{% if user.pk == stylist.user.pk %}
+  <div class="row m-3">
+    <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:portfolio_item_create' pk=stylist.pk%}">Add To Gallery</a>
+  </div>
+{% endif %}
+
+</div><!-- id:gallery -->

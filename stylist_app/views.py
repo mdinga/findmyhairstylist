@@ -85,6 +85,7 @@ def searchedStylists(request, region_pk, hairstyle_pk):
 def viewStylist(request, pk):
     user = request.user
     stylist = models.Stylist.objects.get(pk=pk)
+    reviews = models.Review.objects.filter(stylist=stylist)
     services = stylist.stylist_hairstyles.all()
     portfolio = stylist.portfolio_set.all()
     category = []
@@ -117,7 +118,7 @@ def viewStylist(request, pk):
     context = {'user': user, 'services': services, 'stylist': stylist,
                 'portfolio': portfolio, 'categories': categories,
                 'profile_completeness':profile_completeness,
-                'profile_items':profile_items}
+                'profile_items':profile_items, 'reviews': reviews}
     return render(request, 'stylist_app/stylist_detail.html', context)
 
 

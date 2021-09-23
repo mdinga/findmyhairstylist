@@ -158,9 +158,3 @@ class PortfolioForm(forms.ModelForm):
             'hairstyle': forms.Select(attrs={'class': 'form-control mb-3'}),
             'product': forms.Select(attrs={'class': 'form-control mb-3'}),
             'description': forms.Textarea(attrs={'class': 'form-control mb-3','placeholder': 'Tell your customers about this item'})}
-
-    # def clean(self):
-    #     clean_data = super().clean()
-    #     image = clean_data['image']
-    #     if not image:
-    #         raise forms.ValidationError('Please add an image')

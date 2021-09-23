@@ -6,6 +6,22 @@
 <h3>Welcome {{client}}</h3>
 <p>All your details will appear on this page</p>
 
+
+{% include "client_app/_client_search.html" %}
+
+<h3>Your Favourite Hairstylists</h3>
+  <ul>
+    {% for favourite in favourite_stylists%}
+    <li>{{favourite.stylist.user.name}}
+      <a href="{% url 'client_app:remove_favourite' pk=favourite.pk %}"> remove</a>
+    </li>
+    {% endfor%}
+  </ul>
+  <a class="btn btn-outline-dark m-2" href="{% url 'stylist_app:stylists_view' %}">Search Hairstylists</a>
+
+  <a href="#"></a>
+
+
 </div>
 
 {% endblock %}

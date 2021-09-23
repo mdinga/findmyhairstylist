@@ -1,0 +1,44 @@
+{% load static %}
+<div class="tab-pane mt-5" id='contact'>
+        <div class="row">
+
+          <div class="col-sm-6">
+            <p><strong>Location:</strong> {{ stylist.region }} ({{ stylist.region.city }})</p>
+            <p><strong>Phone: </strong> {{ stylist.phone_number }}</p>
+            <p><strong>House Calls: </strong>
+              {% if stylist.house_calls %} Yes
+              {% else %} No
+              {% endif %}</p>
+
+              {% if stylist.facebook %}
+                <a href="{{ stylist.facebook}}"><img src="{% static "images/facebook_icon1.jpg" %}" alt="facebook"></a>
+              {% endif %}
+
+              {% if stylist.instagram %}
+                <a href="{{ stylist.instagram}}"><img src="{% static "images/insta_icon1.jpg" %}" alt="instagram"></a>
+              {% endif %}
+          </div>
+
+          <div class="col-sm-6">
+
+            {% if stylist.salon %}
+              <p><strong>Salon: </strong>{{ stylist.salon.name }}</p>
+              <p><strong>Salon Address: </strong>{{stylist.salon.address}}, {{stylist.salon.region}}, {{stylist.salon.region.city}}</p>
+              <p><strong>Salon Contact: </strong>{{stylist.salon.phone_number}}</p>
+            {% endif %}
+
+            {% if user.pk == stylist.user.pk %}
+              <p>(<a href="{% url 'stylist_app:salon_create' pk=stylist.pk %}"">Salon not on list? Click here to add Salon Details</a>)</p>
+            {% endif %}
+
+          </div>
+
+        </div>
+
+        {% if user.pk == stylist.user.pk %}
+          <div class="row m-3">
+            <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:stylist_contact_update' pk=stylist.pk%}">Update Contact Details</a>
+          </div>
+        {% endif %}
+
+  </div>

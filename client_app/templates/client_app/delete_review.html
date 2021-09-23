@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+      <a href="{% url 'client_app:delete_review' pk=review.pk %}" class='btn btn-outline-dark m-2'>Back to profile</a>
+
+    <div class="row text-center">
+      <h3> Are you sure you want to your review? All information will be lost.</h3>
+
+
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" name="button" class='btn btn-outline-danger'>Confirm Delete</button>
+    </form>
+    </div>
+
+  </div>
+{% endblock %}

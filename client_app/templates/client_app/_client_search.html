@@ -1,0 +1,67 @@
+<h2>Quick Search</h2>
+
+<form method="GET" action="{% url 'stylist_app:stylists_view' %}">
+
+  <div class="row">
+
+
+
+    <div class="col-sm-6">
+      <div class="form-group mb-2">
+         <label for="hairstyle">Search by Hairstyle</label>
+         <select id="hairstyle" class="form-select form-select-sm" name="hairstyle_name">
+           <option selected></option>
+           {% for style in hairstyles %}
+            <option value="{{ style }}">{{ style.category }} - {{ style }} </option>
+           {% endfor %}
+         </select>
+       </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group mb-2">
+       <label for="region">Search by Region</label>
+       <select id="region" class="form-select form-select-sm" name="region_name">
+         <option selected></option>
+         {% for region in regions %}
+         <option value="{{ region }}">{{ region.city }} - {{ region }}</option>
+         {% endfor %}
+       </select>
+     </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-6">
+      <div class="form-group mb-2">
+          <div class="input-group">
+              <input class="form-control" type="search" name="stylist_name" placeholder="Search by Name" />
+          </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-6">
+      <div class="form-group mb-2">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="houseCall" name="house_call">
+          <label class="form-check-label" for="houseCall">
+            House Calls
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+  <button type="submit" class="btn btn-outline-dark btn-block">Find My Hairstylist</button>
+</form>
