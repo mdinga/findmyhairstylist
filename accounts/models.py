@@ -103,7 +103,7 @@ class Stylist(models.Model):
     house_calls =models.BooleanField(default=False)
     facebook = models.URLField(blank = True)
     instagram = models.URLField(blank = True)
-    rating = models.FloatField(default = 0.0)
+    rating = models.FloatField(default = 0.0, null=True, blank=True)
     hairstyles = models.ManyToManyField(Hairstyle, through='ServiceOffering')
     product = models.ManyToManyField(Product, through='ProductOffering')
     city = models.ForeignKey(City, on_delete=models.SET_NULL, blank=True, null=True)

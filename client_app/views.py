@@ -59,6 +59,10 @@ def updateTotalRating(pk):
     average_score = Review.objects.filter(stylist=stylist).aggregate(Avg('total_rating'))
 
     stylist.rating = average_score['total_rating__avg']
+
+    if not stylist.rating:
+        stylist.rating = 0.0
+        
     stylist.save()
 
 
