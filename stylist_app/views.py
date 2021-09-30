@@ -88,6 +88,7 @@ def viewStylist(request, pk):
     reviews = models.Review.objects.filter(stylist=stylist)
     services = stylist.stylist_hairstyles.all()
     portfolio = stylist.portfolio_set.all()
+    
     category = []
 
     for service in services:

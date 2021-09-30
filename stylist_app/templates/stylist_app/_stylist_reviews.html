@@ -1,28 +1,44 @@
 {% load static %}
-<div class="tab-pane mt-5" id='reviews'>
-<h4>{{stylist.user.name}}'s Reviews</h4>
-  {% for review in reviews %}
+<div class="tab-pane mt-3 mb-3" id='reviews'>
 
-    <p>Reviewed by {{review.client.user.name}} on <em>{{review.created}}</em></p>
-    <p>Appointment Date: {{review.appointment}} </p>
-    <p>Value: {{review.value}}</p>
-    <p>Hygiene: {{review.hygiene}}</p>
-    <p>Expectations Met: {{review.expectation}}</p>
-    <p>Craft: {{review.craft}}</p>
-    <p>Professionalism: {{review.professional}}</p>
-    <p>Would you recommend: {{review.recommendation}}</p>
-    <p><strong>Total Rating: {{review.total_rating}}</strong></p>
+  {% if reviews %}
+    {% for review in reviews %}
+
+      <div class="row">
+        <div class="col-sm-3">
+          <ul style="list-style-type:none;">
+            <li style="font-size:150%"><span class="badge bg-secondary">{{review.total_rating}}</span></li>
+            <li>By: {{review.client.user.name}}</li>
+            <li style="font-size:75%"><em>{{review.created|date:"D, d-m-Y"}}</em></li>
+          </ul>
+        </div>
+
+        <div class="col-sm-9">
+          <ul style="list-style-type:none;">
+            <li>Appointment: {{review.appointment|date:"D, d-m-Y"}}</li>
+            <li><strong>Money:</strong> {{review.value}}/5, <strong>Hygiene:</strong> {{review.hygiene}}/5, <strong>Expectations:</strong> {{review.expectation}}/5,
+                <strong>Skill:</strong> {{review.craft}}/5, <strong>Professionalism:</strong> {{review.professional}}/5</li>
+            <li><em>'{{review.comment}}'</em></li>
+            <li>Recommended: {{review.recommendation}}</li>
+          </ul>
+        </div>
+      </div>
+
+      {% if user.pk == review.client.user.pk %}
+        <a class='btn btn-outline-dark' href="{% url 'client_app:update_review' pk=review.pk%}">Update</a>
+        <a class='btn btn-outline-danger' href="{% url 'client_app:delete_review' pk=review.pk%}">Delete</a>
+      {% endif %}
+
+      {% if user.pk == review.stylist.user.pk %}
+        <a class='btn btn-outline-danger' href="#">Report this Review</a>
+      {% endif %}
+
+      <hr>
+    {% endfor%}
+  {% else %}
+    <p class='lead text-center'>You currently don't have any reviews.</p>
+  {% endif %}
 
 
-    {% if user.pk == review.client.user.pk %}
-      <a class='btn btn-outline-dark' href="{% url 'client_app:update_review' pk=review.pk%}">Update</a>
-      <a class='btn btn-outline-danger' href="{% url 'client_app:delete_review' pk=review.pk%}">Delete</a>
-    {% endif %}
-
-    {% if user.pk == review.stylist.user.pk %}
-      <a class='btn btn-outline-danger' href="#">Report this Review</a>
-    {% endif %}
-
-  {% endfor%}
 
 </div>

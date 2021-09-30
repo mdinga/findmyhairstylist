@@ -1,0 +1,47 @@
+{% load static %}
+
+<div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
+  <h4 class="display-5 text-center mb-3 text-center">My Reviewed Hairstylists</h4>
+
+    <div class="row">
+    {% if reviews %}
+      {% for review in reviews %}
+
+          <div class="col-sm-3 text-center">
+            <ul style="list-style-type:none;"">
+              <a  href="{% url 'stylist_app:stylist_detail' pk=review.stylist.pk %}">
+
+              <img src="{{ review.stylist.profile_pic.url }}" style="width:50%; height:auto;" alt=" No Picture here" class="image--cover"></a>
+
+              <li>{{review.stylist.user.name}}</li>
+              <li style="font-size:150%"><span class="badge bg-secondary">{{review.total_rating}}</span></li>
+
+            </ul>
+          </div>
+
+          <div class="col-sm-9">
+            <ul style="list-style-type:none;">
+              <li><strong>Appointment:</strong> {{review.appointment|date:"D, d-m-Y"}}</li> <br>
+              <li><strong>Money:</strong> {{review.value}}/5, <strong>Hygiene:</strong> {{review.hygiene}}/5, <strong>Expectations:</strong> {{review.expectation}}/5,
+                  <strong>Skill:</strong> {{review.craft}}/5, <strong>Professionalism:</strong> {{review.professional}}/5</li><br>
+              <li><em>'{{review.comment}}'</em></li><br>
+              <li><strong>Recommended:</strong> {{review.recommendation}}</li>
+
+                {% if user.pk == review.client.user.pk %}
+                  <a class='btn btn-outline-dark' href="{% url 'client_app:update_review' pk=review.pk%}">Edit</a>
+                  <a class='btn btn-outline-danger' href="{% url 'client_app:delete_review' pk=review.pk%}">Delete</a>
+                {% endif %}
+
+            </ul>
+          </div>
+          <hr>
+
+
+
+      {% endfor%}
+    {% else %}
+      <p class='lead'>You currently don't have any reviews. After visiting your hairstylists, you can review them here.</p>
+      <a class="btn btn-outline-dark m-1" href="{% url 'stylist_app:stylists_view' %}">Search Hairstylists</a>
+    {% endif %}
+    </div>
+  </div>

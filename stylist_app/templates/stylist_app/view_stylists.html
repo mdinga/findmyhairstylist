@@ -66,7 +66,7 @@
 
             <div class="card-body">
               <h5 class="card-title">{{ stylist.user.name }}
-                <span class="badge bg-secondary">{{stylist.rating}} </span></h5>
+                <span class="badge bg-secondary">{{stylist.rating|floatformat:1}} </span></h5>
                 {% if stylist.region %}
                   <h6 class="card-text">{{stylist.region}} ({{stylist.region.city}})</h6>
                 {% endif %}

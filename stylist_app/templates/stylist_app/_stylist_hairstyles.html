@@ -6,10 +6,21 @@
       <span>Add hairstyles to show your customers what you offer</span>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
+     <div class="row m-3">
+       <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Add Hairstyle</a>
+     </div>
+
     {% endif %}
   {% else %}
 
   <div class="stylist-menu-body">
+    {% if user.pk == stylist.user.pk %}
+      <div class="row m-3">
+        <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Add Hairstyle</a>
+      </div>
+    {% endif %}
+    
     {% for category in categories %}
 
     <!-- Section starts: Appetizers -->
@@ -52,12 +63,14 @@
       </div><!-- <div class="menu-section"> -->
 
     {% endfor %}
+
+    {% if user.pk == stylist.user.pk %}
+      <div class="row m-3">
+        <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Add Hairstyle</a>
+      </div>
+    {% endif %}
   </div><!-- <div class="menu-body"> -->
+
   {% endif %}
 
-  {% if user.pk == stylist.user.pk %}
-   <div class="row m-3">
-     <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Add Hairstyle</a>
-   </div>
-  {% endif%}
 </div>

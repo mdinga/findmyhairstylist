@@ -184,7 +184,7 @@ class Review(models.Model):
     expectation = models.IntegerField(default = 0, choices = SCORES)
     craft = models.IntegerField(default = 0, choices = SCORES)
     professional = models.IntegerField(default = 0, choices = SCORES)
-    comment = models.TextField(max_length= 128, null=True, blank=True)
+    comment = models.TextField(max_length= 256, null=True, blank=True)
     recommendation = models.BooleanField(blank=True, null=True)
     total_rating = models.FloatField(blank=True, null=True)
     appointment = models.DateTimeField(default=datetime.now, blank=True)

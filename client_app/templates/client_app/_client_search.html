@@ -1,67 +1,29 @@
-<h2>Quick Search</h2>
+{% load static %}
+<div class="tab-pane fade show active" id="nav-find" role="tabpanel" aria-labelledby="nav-home-tab">
 
-<form method="GET" action="{% url 'stylist_app:stylists_view' %}">
-
-  <div class="row">
-
-
-
-    <div class="col-sm-6">
-      <div class="form-group mb-2">
-         <label for="hairstyle">Search by Hairstyle</label>
-         <select id="hairstyle" class="form-select form-select-sm" name="hairstyle_name">
-           <option selected></option>
-           {% for style in hairstyles %}
-            <option value="{{ style }}">{{ style.category }} - {{ style }} </option>
-           {% endfor %}
-         </select>
-       </div>
-    </div>
-
-    <div class="col-sm-6">
-      <div class="form-group mb-2">
-       <label for="region">Search by Region</label>
-       <select id="region" class="form-select form-select-sm" name="region_name">
-         <option selected></option>
-         {% for region in regions %}
-         <option value="{{ region }}">{{ region.city }} - {{ region }}</option>
-         {% endfor %}
-       </select>
-     </div>
-    </div>
-
-  </div>
+  <h4 class="display-5 text-center mb-3">Find My Hairstylists</h4>
 
   <div class="row">
-
-    <div class="col-sm-6">
-      <div class="form-group mb-2">
-          <div class="input-group">
-              <input class="form-control" type="search" name="stylist_name" placeholder="Search by Name" />
-          </div>
+    <div class="col-md-6 mb-4">
+      <h4 class="text-center">Basic Search</h4>
+      <p class="lead">Use basic search to find your perfect hairstylists in your area</p>
+      <p>Available for all users</p>
+      <div class="text-center">
+        <a href="{% url 'stylist_app:stylists_view'%}" class='btn btn-outline-dark text-center'>Basic Search</a>
       </div>
+
+
     </div>
+    <div class="col-md-6 mb-4">
+      <h4 class="text-center">Advanced Search</h4>
+      <p class="lead">Tell us about your unique preferences and we'll recommend a hairstylist for you</p>
+      <p>Not available (Coming Soon)</p>
 
-
-    <div class="col-sm-6">
-      <div class="form-group mb-2">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="houseCall" name="house_call">
-          <label class="form-check-label" for="houseCall">
-            House Calls
-          </label>
-        </div>
+      <div class="text-center">
+        <a href="#" class='btn btn-outline-dark'>Advanced Search</a>
       </div>
-    </div>
 
+    </div>
   </div>
 
-
-
-
-
-
-
-
-  <button type="submit" class="btn btn-outline-dark btn-block">Find My Hairstylist</button>
-</form>
+</div>

@@ -1,6 +1,7 @@
 from django import forms
 from django.forms.widgets import NumberInput
 from accounts.models import Review
+from django.core.exceptions import ValidationError
 
 
 class ReviewForm(forms.ModelForm):
@@ -39,3 +40,10 @@ class ReviewForm(forms.ModelForm):
             'comment' : forms.Textarea(attrs={'placeholder': 'Tell us more. e.g. Why did you rate as you did? Any room for improvement?', 'class': 'form-control mb-4'}),
             'recommendation' : forms.NullBooleanSelect(attrs={'class': 'form-control mb-4'}),
         }
+
+        def clean(self):
+            all_clean_data = super().clean()
+            appointment_date = all_clean_data['appointment']
+            review_date = all_clean_data['created']
+            if review_date == appointment_date:
+                raise forms.ValidationError('Your appointment has to be in the past')

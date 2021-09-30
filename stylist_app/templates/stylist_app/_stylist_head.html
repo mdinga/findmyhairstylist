@@ -7,7 +7,9 @@
     </div>
   </div>
   <div class="col-md-8 ml-2">
-    <p class="stylist-name-field" >{{ stylist.user.name }}  <span class="badge bg-secondary">{{ stylist.rating }}</span></p>
+    <p class="stylist-name-field" >{{ stylist.user.name }}  <span class="badge bg-secondary">{{ stylist.rating|floatformat:1 }}</span></p>
+      <p>{{reviews|length}} review(s)</p>
+
 
     <p class = 'stylist-location-field'>
               {% if stylist.region %}
@@ -60,6 +62,7 @@
       <div class="btn-group">
         <a class = 'btn btn-outline-dark m-2' href="{% url 'client_app:add_favourite' pk=stylist.pk %}">Add to Favourites</a>
         <a class = 'btn btn-outline-dark m-2' href="{% url 'client_app:add_review' pk=stylist.pk %}">Review Hairstylist</a>
+
 
       </div>
 

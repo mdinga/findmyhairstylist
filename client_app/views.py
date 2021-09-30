@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.conf import settings
 from mailchimp_marketing import Client
-from accounts.models import Stylist, Client, Review
+from accounts.models import Stylist, Client, Review, ServiceOffering
 from client_app.models import Favourite
 from .forms import ReviewForm
 from mailchimp_marketing.api_client import ApiClientError
@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.db import IntegrityError
+from django.db.models import Avg
 
 
 # Mailchimp Settings
@@ -23,10 +24,11 @@ list_id = settings.MAILCHIMP_EMAIL_LIST_ID
 def viewClient(request, pk):
     client = Client.objects.get(pk = pk)
     favourite_stylists = Favourite.objects.filter(client=client)
+    reviews = Review.objects.filter(client=client)
 
 
 
-    context = {'client':client, 'favourite_stylists':favourite_stylists}
+    context = {'client':client, 'favourite_stylists':favourite_stylists, 'reviews':reviews}
     return render(request, 'client_app/client_details.html', context)
 
 
@@ -52,12 +54,13 @@ def removeFavourite(request, pk):
     return HttpResponseRedirect(reverse('client_app:client_detail', kwargs={'pk': client.pk}))
 
 
-def updateTotalRating(hairstylist, new_rating):
-    stylist = Stylist.objects.get(pk = hairstylist.pk)
-    current_rating = stylist.rating
+def updateTotalRating(pk):
+    stylist = Stylist.objects.get(pk=pk)
+    average_score = Review.objects.filter(stylist=stylist).aggregate(Avg('total_rating'))
 
-    current_rating == current_rating + new_rating
+    stylist.rating = average_score['total_rating__avg']
     stylist.save()
+
 
 def addReview(request, pk):
     client = request.user.client
@@ -73,8 +76,8 @@ def addReview(request, pk):
             instance.client = client
             instance.stylist = stylist
             instance.total_rating = (instance.value+instance.hygiene+instance.expectation+instance.craft+instance.professional)/5
-            new_rating == instance.total_rating
             form.save()
+            updateTotalRating(stylist.pk)
 
             messages.success(request, 'Your review has been added')
             return HttpResponseRedirect(reverse('client_app:view_review', kwargs={'pk': instance.pk}))
@@ -97,7 +100,10 @@ def updateReview(request, pk):
     if request.method == 'POST':
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
+            instance = form.save(commit=False)
+            instance.total_rating = (instance.value+instance.hygiene+instance.expectation+instance.craft+instance.professional)/5
             form.save()
+            updateTotalRating(stylist.pk)
             messages.success(request, 'Review updated')
             return HttpResponseRedirect(reverse('client_app:view_review', kwargs={'pk': review.pk}))
 
@@ -112,6 +118,7 @@ def deleteReview(request, pk):
 
     if request.method == 'POST':
         review.delete()
+        updateTotalRating(stylist.pk)
         messages.success(request, 'Your review has been deleted')
         return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk': stylist.pk}))
 

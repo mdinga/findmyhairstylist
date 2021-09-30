@@ -1,0 +1,43 @@
+{% load static %}
+
+<div class="tab-pane fade" id="nav-favourites" role="tabpanel" aria-labelledby="nav-favourites-tab">
+
+  <h4 class="display-5 text-center mb-3 text-center">My Favourite Hairstylists</h4>
+  <div class="row">
+
+  {% if favourite_stylists %}
+
+    {% for favourite in favourite_stylists%}
+      <div class="card m-1" style="width: 18rem;">
+        <div class= "text-center m-2">
+          <a  href="{% url 'stylist_app:stylist_detail' pk=favourite.stylist.pk %}">
+          <img src="{{ favourite.stylist.profile_pic.url }}" alt=" No Picture here" class="image--cover"></a>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">{{ favourite.stylist.user.name }}
+            <span class="badge bg-secondary">{{favourite.stylist.rating|floatformat:1}} </span></h5>
+            {% if favourite.stylist.region %}
+              <h6 class="card-text">{{favourite.stylist.region}} ({{favourite.stylist.region.city}})</h6>
+            {% endif %}
+
+
+          <p class="card-text">{{favourite.stylist.bio|safe|truncatechars:"50"|linebreaks}}</p>
+
+          <a class="btn btn-outline-dark m-1" href="{% url 'stylist_app:stylist_detail' pk=favourite.stylist.pk %}">View Profile</a>
+          <a class="btn btn-outline-danger m-1" href="{% url 'client_app:remove_favourite' pk=favourite.pk %}"> Remove</a>
+
+
+        </div>
+      </div>
+    {% endfor%}
+
+
+
+  {% else %}
+    <p class='lead'>You don't have any favourite hairstylist yet. Search through the hairstylists and save your favourites.</p>
+    <a class="btn btn-outline-dark m-1" href="{% url 'stylist_app:stylists_view' %}">Search Hairstylists</a>
+  {% endif %}
+
+  </div>
+</div>

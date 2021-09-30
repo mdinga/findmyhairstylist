@@ -145,7 +145,7 @@ class PortfolioForm(forms.ModelForm):
     class Meta:
         model = Portfolio
         exclude = ['likes', 'stylist']
-        field_order = ['description', 'hairstyle', 'product', 'image']
+        field_order = ['image', 'hairstyle', 'product', 'description']
 
         labels = {
             'hairstyle': 'Choose Hairstyle',

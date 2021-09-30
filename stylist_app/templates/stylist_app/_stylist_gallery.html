@@ -13,6 +13,11 @@
     {% endif %}
 
   {% else %}
+  {% if user.pk == stylist.user.pk %}
+    <div class="row m-2">
+      <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:portfolio_item_create' pk=stylist.pk%}">Add To Gallery</a>
+    </div>
+  {% endif %}
     <div class="gallery-cards">
       {% for item in portfolio %}
 
