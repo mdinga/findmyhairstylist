@@ -182,6 +182,40 @@ a{font-size: 0.85em;}
   }
 }
 
+.quote {
+    position: relative;
+    letter-spacing: .03em;
+    margin-bottom: .5rem;
+
+    &:before {
+        content: "“";
+        position: absolute;
+        left: -.7em;
+    }
+    
+    &:after {
+        content: "”";
+        margin-right: -1rem;
+    }
+}
+
+.quote--container {
+    margin: 4.5rem auto 0;
+    width: 17em;
+    border-bottom: 2px dotted #C6D1BF;
+    padding-bottom: .5rem;
+}
+
+.quote--highlight {
+    color: #D24335;
+}
+
+.quote--author {
+    font-family: 'Open Sans Condensed';
+    font-size: .8rem;
+    text-align: right;
+    font-weight: 300;
+}
 
 /* ---------------------------Start Stylist Home Page------------------------ */
 .profile_progress_list ul li {
