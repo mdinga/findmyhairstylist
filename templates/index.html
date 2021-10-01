@@ -25,7 +25,7 @@
 
 <div class="container">
   <blockquote class="blockquote text-center mt-5 mb-5">
-      <p class="mb-0">"Life is more beautiful when you meet the right <span class="quote--highlight">hairstylist</span>."</p>
+      <p class="mb-0">"Life is more beautiful when you meet the right <span style="color:red;">hairstylist</span>."</p>
 
     <p style="font-size:80%;">&ndash; <em>Peter Coppola</em></p>
   </blockquote>
@@ -128,60 +128,13 @@
       </div>
       {% endfor%}
 
-      <h3 class="display-5 mt-3">All Hairstylist or Barber can Sign Up for Free</h3>
+      <h3 class="display-5 mt-3">All Hairstylists or Barbers can Sign Up for Free</h3>
       <hr>
       <p class = "lead">Sign up now and start growing your client base and hair business</p>
       <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark">Stylist - Sign Up</a>
 </div>
 
 </div>
-
-
-<div class="div_5" style="background: url('static/images/scissor.jpg') no-repeat center center scroll;
-                        background-size: cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; height:20em;">
-  <div class="text-center" style="color:white; padding-top:5em;">
-    <h5>Find that perfect hairstylist</h5>
-    <p>Coming Soon for Clients</p>
-    <a href="{% url 'client_app:subscribe' %}" class="btn btn-warning pulse-button">Subscribe as a Client</a>
-
-  </div>
-</div>
-
-<div class="container px-4 py-5" id="icon-grid">
-   <h2 class="pb-2 border-bottom text-center">Signing up is quick and easy</h2>
-
-   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
-     <div class="col d-flex align-items-start">
-       <div class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><i class="fas fa-user-edit"></i></div>
-       <div>
-         <h4 class="fw-bold mb-0">1. Sign Up</h4><hr>
-         <p>Register your profile as a hairstylist <strong>for free</strong>. Enter your contact details for clients to get in contact with you</p>
-       </div>
-     </div>
-     <div class="col d-flex align-items-start">
-       <div class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><i class="fas fa-clipboard-list"></i></div>
-       <div>
-         <h4 class="fw-bold mb-0">2. Upload</h4><hr>
-         <p>Upload your menu with the hairstyles that you offer. The more detail you provide, the better for your clients</p>
-       </div>
-     </div>
-     <div class="col d-flex align-items-start">
-       <div class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><i class="far fa-images"></i></i></div>
-       <div>
-         <h4 class="fw-bold mb-0">3. Populate</h4><hr>
-         <p>Populate your gallery with photos and details of your best work.</p>
-       </div>
-     </div>
-     <div class="col d-flex align-items-start">
-       <div class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><i class="fas fa-users"></i></div>
-       <div>
-         <h4 class="fw-bold mb-0">4. Connect</h4><hr>
-         <p>Use our tools to gain insights and connect with your growing client base</p>
-       </div>
-     </div>
-     </div>
-     <a href="{% url 'accounts:stylist_signup' %}" class="btn btn-outline-dark btn-block text-center">Stylist - Sign Up</a>
-   </div>
 
 
 
