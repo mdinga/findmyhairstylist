@@ -1,5 +1,5 @@
 {% load static %}
-<div class="tab-pane active mt-5" id='styles'>
+<div class="tab-pane fade show active" id="nav-styles" role="tabpanel" aria-labelledby="nav-styles-tab">
   {% if not services %}
     {% if user.pk == stylist.user.pk %}
     <div class="alert alert-dark alert-dismissible fade show text-center" role="alert">
@@ -20,7 +20,7 @@
         <a class = 'btn btn-outline-dark btn-block' href="{% url 'stylist_app:service_create' pk=stylist.pk%}">Add Hairstyle</a>
       </div>
     {% endif %}
-    
+
     {% for category in categories %}
 
     <!-- Section starts: Appetizers -->

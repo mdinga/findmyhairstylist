@@ -12,30 +12,45 @@
 
   {% include "stylist_app/_stylist_head.html" %}
 
-  <div class="stylist_info">
-    <ul class="nav nav-tabs mb-3">
-      <li class="nav-item active">
-        <a class="nav-link" href="#styles" data-toggle="tab">Hairstyles</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#gallery" data-toggle="tab">Gallery</a>
-      </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="#contact" data-toggle="tab">Contacts</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#reviews" data-toggle="tab">Reviews</a>
-      </li>
-        {% if user.pk == stylist.user.pk %}
-          <li class="nav-item">
-            <a class="nav-link" href="#bookings" data-toggle="tab">Bookings</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#customers" data-toggle="tab">Insights</a>
-          </li>
-        {% endif %}
-    </ul>
+  <nav>
+    <div class="nav nav-tabs mb-5" id="nav-tab" role="tablist">
+
+      <button class="nav-link active" id="nav-styles-tab" data-bs-toggle="tab"
+        data-bs-target="#nav-styles" type="button" role="tab"
+        aria-controls="nav-styles" aria-selected="true">Menu
+      </button>
+
+      <button class="nav-link" id="nav-gallery-tab" data-bs-toggle="tab"
+        data-bs-target="#nav-gallery" type="button" role="tab"
+        aria-controls="nav-gallery" aria-selected="false">Gallery
+      </button>
+
+      <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
+        data-bs-target="#nav-contact" type="button" role="tab"
+        aria-controls="nav-contact" aria-selected="false">Contacts
+      </button>
+
+      <button class="nav-link" id="nav-reviews-tab" data-bs-toggle="tab"
+        data-bs-target="#nav-reviews" type="button" role="tab"
+        aria-controls="nav-reviews" aria-selected="false">Reviews
+      </button>
+
+    {% if user.pk == stylist.user.pk %}
+
+      <button class="nav-link" id="nav-bookings-tab"
+        data-bs-toggle="tab" data-bs-target="#nav-bookings" type="button" role="tab"
+        aria-controls="nav-bookings" aria-selected="false">Bookings
+      </button>
+
+      <button class="nav-link" id="nav-insights-tab" data-bs-toggle="tab"
+        data-bs-target="#nav-insights" type="button" role="tab"
+        aria-controls="nav-insights" aria-selected="false">Insights
+      </button>
+
+    {% endif %}
+    </div>
+  </nav>
 
     <div class="tab-content">
         {% include "stylist_app/_stylist_hairstyles.html" %}
@@ -45,7 +60,7 @@
         {% include "stylist_app/_stylist_insights.html" %}
         {% include "stylist_app/_stylist_contacts.html" %}
     </div>
-  </div>
+
 
 </div>
 
