@@ -7,7 +7,20 @@
 
     <div class="text-center m-3">
           <h3>Add To Gallery, {{ stylist.user.name }}</h3>
-          <p><em><strong>NB:</strong> Get permission from your clients before posting their images</em></p>
+          <p><em><strong>NB:</strong> Get permission from your clients before posting their pictures</em></p>
+    </div>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">How to add picture to your Gallery!</h4>
+        <p>To upload a picture to your gallery:</p>
+          <ul>
+            <li>Choose file and upload an image from your phone or PC</li>
+            <li>Write the name of the hairstyle</li>
+            <li>Add additional information about the image (optional)</li>
+          </ul>
+        <hr>
+        <p class="mb-0">Need help with your profile? <a href="{% url 'contact'%}">Email</a> or Whatsapp us on 079 020 2582</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
     <form method="POST" enctype='multipart/form-data' class='m-3'>
@@ -17,6 +30,25 @@
     </form>
 
     <p style="font-size:80%;">Need help with your profile? <a href="{% url 'contact'%}">Email</a> or Whatsapp us on 079 020 2582</p>
-    
+
   </div>
 {% endblock %}
+
+
+<!-- <div class="container">
+  <a href="{% url 'stylist_app:stylist_detail' pk=stylist.pk%}" class='btn btn-outline-dark m-2'>Back to profile</a>
+
+  <div class="text-center m-3">
+        <h3>Add To Gallery, {{ stylist.user.name }}</h3>
+        <p><em><strong>NB:</strong> Get permission from your clients before posting their images</em></p>
+  </div>
+
+  <form method="POST" enctype='multipart/form-data' class='m-3'>
+    {% csrf_token %}
+    {{ form }}
+    <button class='btn btn-outline-dark m-3' name="button">Submit</button>
+  </form>
+
+  <p style="font-size:80%;">Need help with your profile? <a href="{% url 'contact'%}">Email</a> or Whatsapp us on 079 020 2582</p>
+
+</div> -->

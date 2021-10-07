@@ -144,17 +144,17 @@ class PortfolioForm(forms.ModelForm):
 
     class Meta:
         model = Portfolio
-        exclude = ['likes', 'stylist']
-        field_order = ['image', 'hairstyle', 'product', 'description']
+        fields = ['image', 'hairstyle', 'description']
+        field_order = ['image', 'hairstyle', 'description']
 
         labels = {
-            'hairstyle': 'Choose Hairstyle',
+            'hairstyle': 'Hairstyle Label',
             'product': 'Choose Product (if any)',
-            'description': 'Description: (Limit: 128 Characters)'
+            'description': 'Description (optional):'
             }
 
         widgets = {
             'image': forms.FileInput(attrs={'class': 'form-control mb-3'}),
             'hairstyle': forms.Select(attrs={'class': 'form-control mb-3'}),
             'product': forms.Select(attrs={'class': 'form-control mb-3'}),
-            'description': forms.Textarea(attrs={'class': 'form-control mb-3','placeholder': 'Tell your customers about this item'})}
+            'description': forms.Textarea(attrs={'class': 'form-control mb-3','placeholder': 'Tell your customers about this image. e.g. price, discounts etc'})}

@@ -88,7 +88,7 @@ def viewStylist(request, pk):
     reviews = models.Review.objects.filter(stylist=stylist)
     services = stylist.stylist_hairstyles.all()
     portfolio = stylist.portfolio_set.all()
-    
+
     category = []
 
     for service in services:
@@ -265,6 +265,8 @@ def createSalon(request, pk):
 
 def createPortfolio(request, pk):
     stylist = models.Stylist.objects.get(pk=pk)
+    hairstyles = models.Hairstyle.objects.all().order_by('name')
+    categories = models.HairstyleCategory.objects.all().order_by('name')
     form = PortfolioForm
 
     if stylist.portfolio_set.all().count() > 5:
@@ -280,11 +282,9 @@ def createPortfolio(request, pk):
             messages.success(request, 'An item has been added to your gallery')
             return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk': stylist.pk}))
 
-
-
-
-    context = {'form': form, 'stylist':stylist}
+    context = {'form': form, 'stylist':stylist, 'hairstyles':hairstyles, 'categories':categories}
     return render(request, 'stylist_app/portfolio_form.html', context)
+
 
 def updatePortfolio(request, pk):
     item = models.Portfolio.objects.get(pk=pk)

@@ -29,6 +29,9 @@ class Hairstyle(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ('name', 'category__name')
+
 
 class Product(models.Model):
     name = models.CharField(max_length=128)
