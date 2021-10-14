@@ -128,19 +128,23 @@ def updateStylist(request, pk):
     stylist = models.Stylist.objects.get(pk=pk)
     form = StylistForm(instance=stylist)
     user_form = UserForm(instance=stylist.user)
+    contact_form = StylistContactForm(instance=stylist)
 
     if request.method == 'POST':
         form = StylistForm(request.POST, request.FILES, instance=stylist)
         user_form = UserForm(request.POST, instance=stylist.user)
-        if form.is_valid():
+        contact_form = StylistContactForm(request.POST, instance=stylist)
+
+        if form.is_valid() and user_form.is_valid() and contact_form.is_valid():
             form.save()
             user_form.save()
+            contact_form.save()
             messages.success(request, 'Your profile has been updated')
             return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk': stylist.pk}))
         else:
             return HttpResponse("Oops looks like something went wrong. Please try again")
 
-    context = {'form':form, 'user_form': user_form}
+    context = {'form':form, 'user_form': user_form, 'contact_form': contact_form}
     return render(request, 'stylist_app/stylist_form.html', context)
 
 def updateStylistContact(request, pk):
@@ -172,6 +176,8 @@ def limit_top_styles(styles, limit):
 
 def createService(request, pk):
     stylist = models.Stylist.objects.get(pk=pk)
+    hairstyles = models.Hairstyle.objects.all()
+    categories = models.HairstyleCategory.objects.all()
     current_services = stylist.stylist_hairstyles.all()
     form = ServiceForm
 
@@ -205,7 +211,7 @@ def createService(request, pk):
                     return HttpResponseRedirect(reverse('stylist_app:stylist_detail', kwargs={'pk': stylist.pk}))
                     messages.error(request, 'Sorry, you already have this hairstyle')
 
-    context = {'form':form}
+    context = {'stylist':stylist, 'form': form}
     return render(request, 'stylist_app/hair_form.html', context)
 
 def updateService(request, pk):

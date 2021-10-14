@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
+{% load widget_tweaks %}
 
   <div class="container">
     <a href="{% url 'stylist_app:stylist_detail' pk=user.stylist.pk %}" class='btn btn-outline-dark m-2'>Back to profile</a>
@@ -10,14 +10,33 @@
           <h3>Update your Profile, {{ user.name }}</h3>
     </div>
 
-    <form method="POST" enctype='multipart/form-data'>
+    <form method="POST" enctype='multipart/form-data' id='stylist_form' data-regions-url="{% url 'ajax_load_regions'%}">
       {% csrf_token %}
       <!-- user main details -->
       {{ user_form.as_p}}
 
-      <!-- stylist details  -->
+        <!-- stylist details  -->
       {{ form.media}}
       {{ form.as_p}}
+
+      <!-- stylist contact form details  -->
+
+
+      <div class="text-center">
+        <h3 class='m-3'>Your Contact and Location Details</h3>
+      </div>
+
+      <!-- {{ contact_form.as_p}} -->
+
+      {% for field in contact_form.visible_fields %}
+        <div class="form-group">
+       <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+       {{ field|add_class:'form-control' }}
+         {% for error in field.errors %}
+           <span class="help-block">{{ error }}</span>
+         {% endfor %}
+        </div>
+      {% endfor %}
 
       <div class="text-center m-3">
           <button class='btn btn-outline-dark btn-block' name="button">Submit</button>
@@ -34,15 +53,42 @@
 
       </div>
 
-
-
-
-
-
       <div>
         <a href="{% url 'accounts:user_delete' pk=user.pk %}" class='btn btn-outline-danger ml-1'>Delete Profile</a>
       </div>
     </div>
 
   </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script>
+    $("#id_city").change(function () {
+           var url = $("#stylist_form").attr("data-regions-url");  // get the url of the `load_region` view
+           var cityId = $(this).val();  // get the selected country ID from the HTML input
+
+           $.ajax({                       // initialize an AJAX request
+               url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+               data: {
+                   'city': cityId       // add the country id to the GET parameters
+               },
+               success: function (data) {   // `data` is the return of the `load_cities` view function
+                   $("#id_region").html(data);  // replace the contents of the city input with the data that came from the server
+                   /*
+
+                   let html_data = '<option value="">---------</option>';
+                   data.forEach(function (city) {
+                       html_data += `<option value="${city.id}">${city.name}</option>`
+                   });
+                   console.log(html_data);
+                   $("#id_city").html(html_data);
+
+                   */
+               }
+           });
+
+       });
+
+
+  </script>
 {% endblock %}

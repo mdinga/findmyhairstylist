@@ -29,19 +29,24 @@ class StylistContactForm(forms.ModelForm):
 
 
         labels = {
-            'house_calls': 'I Do House Calls',
-            'salon': 'Salon(if applicable)'
+            'phone_number': 'Phone Number:',
+            'house_calls': 'Do you do House Calls?:',
+            'city': 'City:',
+            'region': 'Neighbourhood:',
+            'salon': 'Salon Name (if applicable):',
+            'facebook': 'Facebook Page Link:',
+            'instagram': 'Instagram Page Link:'
         }
 
         widgets = {
 
-            'phone_number': forms.TextInput(attrs={'class':'form-control'},),
-            'house_calls': forms.NullBooleanSelect(attrs={'class':'form-control'}),
-            'city': forms.Select(attrs={'class':'form-control'}),
-            'region': forms.Select(attrs={'class':'form-control'}),
-            'salon':forms.Select(attrs={'class':'form-control'} ),
-            'facebook': forms.URLInput(attrs={'class':'form-control', 'placeholder': 'Enter your full Facbook Page Link'}),
-            'instagram': forms.URLInput(attrs={'class':'form-control', 'placeholder': 'Enter your full Instagram Page Link'})
+            'phone_number': forms.TextInput(attrs={'class':'form-control mb-4'},),
+            'house_calls': forms.NullBooleanSelect(attrs={'class':'form-control mb-4'}),
+            'city': forms.Select(attrs={'class':'form-control mb-4'}),
+            'region': forms.Select(attrs={'class':'form-control mb-4'}),
+            'salon':forms.Select(attrs={'class':'form-control mb-4'} ),
+            'facebook': forms.URLInput(attrs={'class':'form-control mb-4', 'placeholder': 'Enter your full Facbook Page Link'}),
+            'instagram': forms.URLInput(attrs={'class':'form-control mb-4', 'placeholder': 'Enter your full Instagram Page Link'})
         }
 
         def __init__(self, *args, **kwargs):

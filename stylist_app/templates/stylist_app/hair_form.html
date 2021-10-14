@@ -9,7 +9,25 @@
       <a class='btn btn-outline-dark m-2' href="{% url 'stylist_app:stylist_detail' pk=user.stylist.pk %}">Back to profile</a>
 
     <div class="text-center m-3">
-          <h3>Add/Edit a Hairstyle, {{ user.name }}</h3>
+          <h3>Add/Edit a Hairstyle, {{ stylist.user.name }}</h3>
+    </div>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">How to add a hairstyle to your Menu.</h4>
+      <p><em>Scroll down to add a hairstyle.</em></p>
+          <ol>
+            <li>Under <strong>Select Category</strong> choose the category your hairstyle belongs in.</li>
+            <li>Under <strong>Select Hairstyle</strong> select name of your hairstyle.</li>
+            <li>Under <strong>More Info</strong> write additional information about your hairstyle. This is optional.</li>
+            <li>Under <strong>Add Price</strong> add the price of your hairstyle. This is optional.</li>
+            <li>Under <strong>I Specialize in this Style</strong>, select yes if this hairstyle is one of your speciality. You can have a maximum of 3 hairstyles that you specialize in.</li>
+            <li>Press <strong>Submit</strong>. Your hairstyle will be added to your menu.</li>
+            <li><strong>Repeat</strong> these steps to add another hairstyle to your menu.</li>
+
+          </ol>
+        <hr>
+        <p class="mb-0">Need help with your profile? <a href="{% url 'contact'%}">Email</a> or Whatsapp us on 079 020 2582</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
 
@@ -53,14 +71,12 @@
                success: function (data) {   // `data` is the return of the `load_cities` view function
                    $("#id_hairstyle").html(data);  // replace the contents of the city input with the data that came from the server
                    /*
-
                    let html_data = '<option value="">---------</option>';
                    data.forEach(function (city) {
                        html_data += `<option value="${city.id}">${city.name}</option>`
                    });
                    console.log(html_data);
                    $("#id_city").html(html_data);
-
                    */
                }
            });
