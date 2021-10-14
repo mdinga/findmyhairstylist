@@ -13,15 +13,15 @@
     </div>
 
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <h4 class="alert-heading">How to add a hairstyle to your Menu.</h4>
+      <h4 class="alert-heading">How to add/edit a hairstyle to your Menu.</h4>
       <p><em>Scroll down to add a hairstyle.</em></p>
           <ol>
-            <li>Under <strong>Select Category</strong> choose the category your hairstyle belongs in.</li>
-            <li>Under <strong>Select Hairstyle</strong> select name of your hairstyle.</li>
-            <li>Under <strong>More Info</strong> write additional information about your hairstyle. This is optional.</li>
-            <li>Under <strong>Add Price</strong> add the price of your hairstyle. This is optional.</li>
-            <li>Under <strong>I Specialize in this Style</strong>, select yes if this hairstyle is one of your speciality. You can have a maximum of 3 hairstyles that you specialize in.</li>
-            <li>Press <strong>Submit</strong>. Your hairstyle will be added to your menu.</li>
+            <li>Under  <span id="select_category"><strong>Select Category</strong></span> choose the category your hairstyle belongs to.</li>
+            <li>Under <span id="select_hairstyle"><strong>Select Hairstyle</strong></span> select name of your hairstyle.</li>
+            <li>Under <span id="select_info"><strong>More Info</strong></span> write additional information about your hairstyle. This is optional.</li>
+            <li>Under <span id="select_price"><strong>Add Price</strong></span> add the price of your hairstyle. This is optional.</li>
+            <li>Under <span id="select_specialize"><strong>I Specialize in this Style</strong></span>, select yes if this hairstyle is one of your speciality. You can have a maximum of 3 hairstyles that you specialize in.</li>
+            <li>Press <span id="select_submit"><strong>Submit</strong></span>. Your hairstyle will be added to your menu.</li>
             <li><strong>Repeat</strong> these steps to add another hairstyle to your menu.</li>
 
           </ol>
@@ -45,7 +45,7 @@
         </div>
       {% endfor %}
 
-      <button class='btn btn-outline-dark m-3' name="button">Submit</button>
+      <button class='btn btn-outline-dark m-3' name="button" id = "submit_input">Submit</button>
     </form>
 
     <p style="font-size:80%;">Need help with your profile? <a href="{% url 'contact'%}">Email</a> or Whatsapp us on 079 020 2582</p>
@@ -80,8 +80,45 @@
                    */
                }
            });
-
        });
+
+
+   $("#select_category").click(function (){
+       $('html, body').animate({
+           scrollTop: $("#hairstyle_input").offset().top
+       }, 1000);
+   });
+
+   $("#select_hairstyle").click(function (){
+       $('html, body').animate({
+           scrollTop: $("#category_input").offset().top
+       }, 1000);
+   });
+
+   $("#select_info").click(function (){
+       $('html, body').animate({
+           scrollTop: $("#info_input").offset().top
+       }, 1000);
+   });
+
+   $("#select_price").click(function (){
+       $('html, body').animate({
+           scrollTop: $("#price_input").offset().top
+       }, 1000);
+   });
+
+   $("#select_specialize").click(function (){
+       $('html, body').animate({
+           scrollTop: $("#specialize_input").offset().top
+       }, 1000);
+   });
+
+   $("#select_submit").click(function (){
+       $('html, body').animate({
+           scrollTop: $("#submit_input").offset().top
+       }, 1000);
+   });
+
 
 
   </script>

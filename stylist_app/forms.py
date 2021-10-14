@@ -79,11 +79,11 @@ class ServiceForm(forms.ModelForm):
         }
 
         widgets = {
-            'category' : forms.Select(attrs={'class': 'form-control mb-4'}),
-            'hairstyle': forms.Select(attrs={'class': 'form-control mb-4'}),
-            'description': forms.Textarea(attrs={'placeholder': 'Optional: Provide additional details on this hairstyle', 'class': 'form-control mb-4'}),
-            'price': forms.TextInput(attrs={'placeholder': 'Optional (Leave blank for POA)', 'class': 'form-control mb-4'}),
-            'top_style': forms.NullBooleanSelect(attrs={'class': 'form-control mb-4'})
+            'category' : forms.Select(attrs={'class': 'form-control mb-4', 'id': 'category_input'}),
+            'hairstyle': forms.Select(attrs={'class': 'form-control mb-4', 'id': 'hairstyle_input'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Optional: Provide additional details on this hairstyle', 'class': 'form-control mb-4', 'id':'info_input'}),
+            'price': forms.TextInput(attrs={'placeholder': 'Optional (Leave blank for POA)', 'class': 'form-control mb-4', 'id':'price_input'}),
+            'top_style': forms.NullBooleanSelect(attrs={'class': 'form-control mb-4', 'id': 'specialize_input'})
         }
 
         def __init__(self, *args, **kwargs):
